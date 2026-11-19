@@ -3,6 +3,10 @@
 All notable changes to this website. Newest first.
 Versioning: MAJOR.MINOR.PATCH (major = redesign, minor = new section/feature, patch = content or fix).
 
+## [1.9.0] - 2026-11-19
+
+- Education as a level-up staircase: LVL 01 SSC to LVL 05 M.Sc., circuit path with years, MAX LEVEL badge, verification signature
+
 ## [1.8.0] - 2026-11-19
 
 - Unique pieces: live threat map background (simulated attacks to Dhaka) replaces particles, operator console hero (status bar, callsign, mission briefing, loadout meters), git log style career

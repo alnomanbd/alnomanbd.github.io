@@ -102,8 +102,7 @@
     // experience
     renderGitLog();
     renderGantt();
-    $("#edu").innerHTML = (S.education || []).map((e) => `
-      <div class="edu-item reveal"><span class="tl-period">${esc(e.period)}</span><h5>${esc(e.degree)}</h5>${e.school ? `<div class="school">${esc(e.school)}</div>` : ""}${e.note ? `<p>${esc(e.note)}</p>` : ""}</div>`).join("");
+    renderEdu();
 
     renderCerts();
     renderProjects();
@@ -222,6 +221,39 @@
     decrypt(lEl, last, 1300, 700);
   }
 
+
+
+  /* ---------- education: level-up staircase ---------- */
+  function renderEdu() {
+    const list = (S.education || []).slice().reverse(); // oldest first, so the stairs climb
+    const n = list.length;
+    const meta = (d) => {
+      if (/master/i.test(d)) return ["M.SC.", "RESEARCHER", "sky"];
+      if (/bachelor/i.test(d)) return ["B.SC.", "ENGINEER", "teal"];
+      if (/diploma/i.test(d)) return ["DIPLOMA", "NETWORK OPS", "lilac"];
+      if (/higher secondary|hsc/i.test(d)) return ["HSC", "SCIENCE", "coral"];
+      if (/secondary|ssc/i.test(d)) return ["SSC", "FOUNDATION", "coral"];
+      return [d.split(/[,(]/)[0].toUpperCase(), "LEVEL", "amber"];
+    };
+    const sig = (str) => { let x = 5381; for (const ch of str) x = ((x << 5) + x + ch.charCodeAt(0)) >>> 0; return x.toString(16).padStart(8, "0"); };
+    const yearOf = (p) => (String(p).match(/(\d{4})\s*$/) || [, ""])[1];
+    const path = `<div class="et-path" aria-hidden="true">${list.map((e, i) => `<span class="et-node${i === n - 1 ? " max" : ""}" style="left:${((i + 0.5) / n) * 100}%"></span><span class="et-year" style="left:${((i + 0.5) / n) * 100}%">${esc(yearOf(e.period))}</span>`).join("")}<i class="et-fill"></i></div>`;
+    const cards = list.map((e, i) => {
+      const [short, rank, color] = meta(e.degree);
+      const field = e.degree.includes(",") ? e.degree.split(",").slice(1).join(",").trim() : "";
+      const top = i === n - 1;
+      return `<article class="et-card${top ? " max" : ""}" style="--c:${col(color, i)};--lift:${i}">
+        <div class="et-top mono"><span class="et-lvl">LVL ${String(i + 1).padStart(2, "0")}</span>${top ? '<span class="et-max">MAX LEVEL</span>' : `<span class="et-ok">UNLOCKED</span>`}</div>
+        <h5 class="et-deg">${esc(short)}</h5>
+        <p class="et-rank mono">// ${esc(rank)}</p>
+        ${field ? `<p class="et-field">${esc(field)}</p>` : ""}
+        <p class="et-school">${esc(e.school || "")}</p>
+        ${e.note ? `<p class="et-note">${esc(e.note)}</p>` : ""}
+        <div class="et-foot mono"><span>${esc(e.period)}</span><span class="et-sig" title="verification signature">sig ${sig(e.degree + e.school)}</span></div>
+      </article>`;
+    }).join("");
+    $("#edu").innerHTML = path + `<div class="et-stairs" style="--n:${n}">${cards}</div>`;
+  }
 
   /* ---------- experience: git log --graph ---------- */
   function renderGitLog() {
