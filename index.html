@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Abdullah Al-Noman | Security Engineer</title>
+  <meta name="description" content="Abdullah Al-Noman: Senior Security Engineer. SOC, DevSecOps, Penetration Testing (CPENT), Threat Intelligence and security research.">
+  <meta name="theme-color" content="#04070b">
+  <meta property="og:title" content="Abdullah Al-Noman | Security Engineer">
+  <meta property="og:description" content="SOC builder, DevSecOps engineer, CPENT penetration tester and security researcher.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- Boot screen -->
+  <div id="boot" aria-hidden="true">
+    <pre id="boot-log"></pre>
+  </div>
+
+  <canvas id="matrix" aria-hidden="true"></canvas>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div id="cursor-glow" aria-hidden="true"></div>
+  <div id="progress"></div>
+
+  <header class="nav" id="nav">
+    <a class="brand" href="#home"><span class="prompt">root@</span><span class="host">alnoman</span><span class="blink">_</span></a>
+    <button class="menu-btn" id="menu-btn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <nav id="menu">
+      <a href="#about"><i>01.</i>about</a>
+      <a href="#skills"><i>02.</i>skills</a>
+      <a href="#experience"><i>03.</i>experience</a>
+      <a href="#projects"><i>04.</i>projects</a>
+      <a href="#research"><i>05.</i>research</a>
+      <a href="#terminal"><i>06.</i>terminal</a>
+      <a href="#contact" class="nav-cta"><i>07.</i>contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <p class="hero-hello mono"><span class="g">$</span> whoami</p>
+          <h1 class="glitch" id="hero-name" data-text="Abdullah Al-Noman">Abdullah Al-Noman</h1>
+          <h2 class="hero-role mono"><span class="g">&gt;</span> <span id="typed"></span><span class="caret">|</span></h2>
+          <p class="hero-tag" id="hero-tag"></p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects"><span>view_projects()</span></a>
+            <a class="btn btn-ghost" href="#contact"><span>./contact.sh</span></a>
+          </div>
+          <div class="hero-social" id="hero-social"></div>
+        </div>
+        <div class="hero-right">
+          <div class="term-window">
+            <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">alnoman@kali: ~/recon</span></div>
+            <pre class="term-body" id="hero-term"></pre>
+          </div>
+          <div class="radar" aria-hidden="true"><div class="sweep"></div><span class="blip b1"></span><span class="blip b2"></span><span class="blip b3"></span></div>
+        </div>
+      </div>
+      <div class="stats" id="stats"></div>
+      <a class="scroll-hint mono" href="#about">scroll <span>v</span></a>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <h3 class="section-title"><span class="num">01.</span> cat about.md<span class="line"></span></h3>
+      <div class="about-grid">
+        <div class="about-text reveal" id="about-text"></div>
+        <div class="about-side reveal">
+          <div class="avatar-wrap">
+            <div class="avatar-ring"></div>
+            <img id="avatar" alt="Avatar" src="assets/img/avatar.svg">
+            <div class="avatar-badge mono">ID: VERIFIED</div>
+          </div>
+          <div class="now-card">
+            <p class="mono now-title"><span class="pulse"></span> currently_working_on</p>
+            <ul id="now-list"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+      <h3 class="section-title"><span class="num">02.</span> ls ./skills<span class="line"></span></h3>
+      <div class="skills-grid" id="skills-grid"></div>
+      <div class="marquee reveal" aria-label="Tools I use"><div class="marquee-track" id="arsenal"></div></div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section">
+      <h3 class="section-title"><span class="num">03.</span> history | grep career<span class="line"></span></h3>
+      <div class="timeline" id="timeline"></div>
+      <div class="two-col">
+        <div class="reveal">
+          <h4 class="sub-title mono">// certifications</h4>
+          <div class="certs" id="certs"></div>
+        </div>
+        <div class="reveal">
+          <h4 class="sub-title mono">// education</h4>
+          <div class="edu" id="edu"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <h3 class="section-title"><span class="num">04.</span> ./projects --all<span class="line"></span></h3>
+      <div class="filters mono" id="filters"></div>
+      <div class="projects-grid" id="projects-grid"></div>
+    </section>
+
+    <!-- RESEARCH + WRITING -->
+    <section id="research" class="section">
+      <h3 class="section-title"><span class="num">05.</span> research &amp;&amp; writing<span class="line"></span></h3>
+      <div class="two-col">
+        <div class="research-card reveal" id="research-card"></div>
+        <div class="reveal">
+          <h4 class="sub-title mono">// latest notes</h4>
+          <div class="posts" id="posts"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE TERMINAL -->
+    <section id="terminal" class="section">
+      <h3 class="section-title"><span class="num">06.</span> interactive shell<span class="line"></span></h3>
+      <p class="muted reveal">Prefer the command line? Type <code>help</code> and press Enter.</p>
+      <div class="term-window big reveal" id="shell">
+        <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">guest@alnoman.infosec: ~</span></div>
+        <div class="term-body" id="shell-out"></div>
+        <div class="shell-input"><span class="ps1">guest@alnoman:~$</span><input id="shell-in" autocomplete="off" spellcheck="false" aria-label="Terminal input"></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section contact">
+      <h3 class="section-title center"><span class="num">07.</span> establish_connection()<span class="line"></span></h3>
+      <div class="contact-box reveal">
+        <p class="mono g small">[ secure channel open ]</p>
+        <h2>Let's work together</h2>
+        <p class="muted">Security engineering, SOC builds, AppSec reviews, research collaboration or just a good talk about threats. My inbox is open.</p>
+        <a class="btn btn-primary big" id="mail-btn" href="#"><span>send_message --encrypted</span></a>
+        <div class="contact-links" id="contact-links"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer mono">
+    <p><span class="g">&lt;/&gt;</span> built by <span id="foot-name">alnoman</span> | v<span id="version">1.0.0</span> | updated <span id="updated"></span></p>
+    <p class="muted small">Stay curious. Stay ethical. <span class="g">#</span>infosec</p>
+  </footer>
+
+  <script src="data/site.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="#0b2a1f"/><stop offset="1" stop-color="#04070b"/></radialGradient>
+    <linearGradient id="hood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#12302a"/><stop offset="1" stop-color="#061410"/></linearGradient>
+  </defs>
+  <rect width="240" height="240" fill="url(#bg)"/>
+  <g fill="#00ff9c" fill-opacity=".14" font-family="monospace" font-size="11">
+    <text x="12" y="30">01001</text><text x="180" y="44">0x1F</text><text x="20" y="210">sudo</text><text x="176" y="200">1337</text><text x="190" y="120">10</text><text x="14" y="120">01</text>
+  </g>
+  <path d="M120 40c-42 0-66 32-66 74v40c0 18 8 34 20 46h92c12-12 20-28 20-46v-40c0-42-24-74-66-74z" fill="url(#hood)" stroke="#00ff9c" stroke-opacity=".5" stroke-width="2"/>
+  <ellipse cx="120" cy="124" rx="40" ry="46" fill="#020504"/>
+  <g fill="#00ff9c">
+    <rect x="98" y="114" width="14" height="5" rx="2"><animate attributeName="opacity" values="1;1;0.1;1" dur="4s" repeatCount="indefinite"/></rect>
+    <rect x="128" y="114" width="14" height="5" rx="2"><animate attributeName="opacity" values="1;1;0.1;1" dur="4s" repeatCount="indefinite"/></rect>
+  </g>
+  <path d="M106 146h28" stroke="#00e5ff" stroke-width="3" stroke-linecap="round" stroke-opacity=".7"/>
+  <path d="M60 240c6-30 30-46 60-46s54 16 60 46z" fill="#0a1d18" stroke="#00ff9c" stroke-opacity=".35" stroke-width="2"/>
+</svg>
