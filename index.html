@@ -4,205 +4,171 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Abdullah Al Noman | Senior Cybersecurity Engineer</title>
-  <meta name="description" content="Abdullah Al Noman: Senior Cybersecurity Engineer. SOC, DevSecOps, Penetration Testing (CPENT, CEH), AI-driven security, Threat Intelligence and security research.">
-  <meta name="theme-color" content="#0a0e1a">
+  <meta name="description" content="Abdullah Al Noman: Senior Cybersecurity Engineer. SOC, DevSecOps, Penetration Testing (CPENT, CEH), dark web research, threat intelligence and security research.">
+  <meta name="theme-color" content="#f3f0e8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f1012" media="(prefers-color-scheme: dark)">
   <meta property="og:title" content="Abdullah Al Noman | Senior Cybersecurity Engineer">
-  <meta property="og:description" content="SOC architect, DevSecOps engineer, CPENT penetration tester and security researcher.">
+  <meta property="og:description" content="SOC architect, DevSecOps engineer, CPENT penetration tester, dark web researcher and security researcher.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://alnomanbd.github.io/assets/img/avatar.jpg">
-  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/favicon.png">
+  <script>
+    /* set theme before paint to avoid a flash */
+    (function () { var t = null; try { t = localStorage.getItem("theme"); } catch (e) {}
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=1.3.0">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css?v=1.4.0">
 </head>
 <body>
-  <!-- boot -->
-  <div id="boot" aria-hidden="true"><pre id="boot-log"></pre></div>
+  <div id="progress" aria-hidden="true"></div>
 
-  <!-- background layers -->
-  <canvas id="net" aria-hidden="true"></canvas>
-  <div class="bg-dots" aria-hidden="true"></div>
-  <div class="bg-glow" aria-hidden="true"></div>
-  <svg class="bg-contours" aria-hidden="true" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice"><g id="contours"></g></svg>
-  <div class="hud" aria-hidden="true">
-    <span class="hc tl"></span><span class="hc tr"></span><span class="hc bl"></span><span class="hc br"></span>
-    <span class="hud-geo mono" id="hud-geo">LAT 23.81 N &nbsp; LON 90.41 E</span>
-    <span class="hud-status mono">STATUS: <b>ONLINE</b> &nbsp;|&nbsp; METHOD: DEFENSE IN DEPTH &nbsp;|&nbsp; <span id="hud-clock"></span></span>
-  </div>
-  <div id="progress"></div>
-
-  <!-- nav -->
   <header class="nav" id="nav">
-    <a class="brand" href="#home" aria-label="Home">
-      <span class="brand-mark">AN</span>
-      <span class="brand-text mono">alnoman<span class="amber">.infosec</span></span>
-    </a>
-    <button class="menu-btn" id="menu-btn" aria-label="Open menu"><span></span><span></span><span></span></button>
-    <nav id="menu">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
-      <a href="#certifications">Certifications</a>
-      <a href="#projects">Projects</a>
-      <a href="#research">Research</a>
-      <a href="#terminal">Terminal</a>
-      <a href="#contact" class="nav-cta">Contact</a>
-    </nav>
+    <div class="nav-inner">
+      <a class="brand" href="#home" aria-label="Home">
+        <img class="brand-pic" src="assets/img/avatar.jpg" alt="" width="36" height="36">
+        <span class="brand-name">Abdullah Al Noman</span>
+      </a>
+      <nav id="menu">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#projects">Projects</a>
+        <a href="#research">Research</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-tools">
+        <button class="icon-btn" id="theme-btn" aria-label="Toggle light and dark mode" title="Toggle theme">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 1 1 9.5 3.5a7 7 0 0 0 11 11Z"/></svg>
+        </button>
+        <button class="icon-btn menu-btn" id="menu-btn" aria-label="Open menu"><span></span><span></span></button>
+      </div>
+    </div>
   </header>
 
   <main>
     <!-- HERO -->
-    <section id="home" class="hero">
-      <div class="hero-inner">
-        <div class="hero-left">
-          <p class="prompt mono"><span class="teal">&gt;</span> whoami --public</p>
+    <section id="home" class="hero wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="kicker mono" id="hero-kicker"></p>
           <h1 class="hero-name" id="hero-name"></h1>
-          <p class="hero-role mono"><span class="amber">[</span> <span id="typed"></span><span class="caret">_</span> <span class="amber">]</span></p>
-          <p class="hero-tag" id="hero-tag"></p>
-          <div class="hero-chips" id="hero-chips"></div>
+          <p class="hero-lead" id="hero-lead"></p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#projects">View operations</a>
-            <a class="btn btn-ghost" href="#contact">Get in touch</a>
+            <a class="btn btn-solid" href="#projects">See my work</a>
+            <a class="btn btn-line" href="#contact">Contact</a>
+            <span class="hero-links" id="hero-social"></span>
           </div>
-          <div class="socials" id="hero-social"></div>
         </div>
-
-        <div class="hero-right">
-          <div class="radar" aria-hidden="true">
-            <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
-            <span class="axis x"></span><span class="axis y"></span>
-            <span class="sweep"></span>
-            <span class="blip b1"></span><span class="blip b2"></span><span class="blip b3"></span><span class="blip b4"></span>
-          </div>
-          <article class="dossier" id="dossier">
-            <div class="dossier-tab mono">CASE FILE #001</div>
-            <div class="dossier-head">
-              <div class="dossier-photo"><img id="dossier-img" alt="Abdullah Al Noman" src="assets/img/avatar.jpg"><span class="scan"></span></div>
-              <div>
-                <p class="mono tiny muted">SUBJECT</p>
-                <h3 id="dossier-name"></h3>
-                <p class="mono small teal" id="dossier-title"></p>
-              </div>
-            </div>
-            <dl class="dossier-meta mono" id="dossier-meta"></dl>
-            <div class="stamp mono">CLEARED</div>
-          </article>
-        </div>
+        <figure class="portrait">
+          <img id="portrait-img" src="assets/img/avatar.jpg" alt="Portrait of Abdullah Al Noman" width="600" height="600">
+          <figcaption class="mono" id="portrait-cap"></figcaption>
+        </figure>
       </div>
-
-      <div class="stats" id="stats"></div>
+      <dl class="figures" id="stats"></dl>
     </section>
 
     <!-- ABOUT -->
-    <section id="about" class="section">
-      <header class="sec-head reveal">
-        <span class="tag mono">DOSSIER</span>
-        <h2>Who I am</h2>
-        <p class="sec-lead">Defender by day, breaker by permission, researcher at heart.</p>
-      </header>
+    <section id="about" class="section wrap">
+      <div class="sec-label mono">About</div>
       <div class="about-grid">
-        <div class="about-text glass reveal" id="about-text"></div>
-        <div class="now-card glass reveal">
-          <p class="mono now-title"><span class="pulse"></span> CURRENT OPERATIONS</p>
-          <ol id="now-list"></ol>
-        </div>
+        <div class="about-text reveal" id="about-text"></div>
+        <aside class="now reveal">
+          <h3 class="mono small-head">Currently</h3>
+          <ul id="now-list"></ul>
+          <h3 class="mono small-head">Focus areas</h3>
+          <p class="focus" id="focus"></p>
+        </aside>
       </div>
     </section>
 
     <!-- SKILLS -->
-    <section id="skills" class="section">
-      <header class="sec-head reveal">
-        <span class="tag mono tag-teal">CAPABILITIES</span>
-        <h2>What I bring to the table</h2>
-        <p class="sec-lead">Eight areas, one goal: find it before the attacker does.</p>
-      </header>
-      <div class="skills-grid" id="skills-grid"></div>
-      <div class="marquee reveal" aria-label="Tools I use"><div class="marquee-track" id="arsenal"></div></div>
+    <section id="skills" class="section wrap">
+      <div class="sec-label mono">Skills</div>
+      <h2 class="sec-title reveal" id="skills-title">Many domains, one job: <em>find it before the attacker does.</em></h2>
+      <div class="skills-layout">
+        <div class="radar-wrap reveal"><svg id="radar" viewBox="0 0 520 520" role="img" aria-label="Skill radar chart"></svg></div>
+        <div class="skill-list reveal" id="skill-list"></div>
+      </div>
     </section>
 
     <!-- EXPERIENCE -->
-    <section id="experience" class="section">
-      <header class="sec-head reveal">
-        <span class="tag mono tag-lilac">TIMELINE</span>
-        <h2>Career trail</h2>
-        <p class="sec-lead">From writing code to securing banks, fintech and government systems.</p>
-      </header>
-      <div class="timeline" id="timeline"></div>
-      <h3 class="sub-head mono reveal">// EDUCATION</h3>
+    <section id="experience" class="section wrap">
+      <div class="sec-label mono">Experience</div>
+      <h2 class="sec-title reveal">Twelve years, from writing code to <em>defending banks, fintech and government.</em></h2>
+      <div class="gantt reveal" id="gantt"></div>
+      <div class="roles" id="roles"></div>
+      <h3 class="mono small-head spaced">Education</h3>
       <div class="edu" id="edu"></div>
     </section>
 
     <!-- CERTIFICATIONS -->
-    <section id="certifications" class="section">
-      <header class="sec-head reveal">
-        <span class="tag mono tag-sky">CREDENTIALS</span>
-        <h2>Certifications</h2>
-        <p class="sec-lead" id="cert-lead"></p>
-      </header>
-      <div class="pills mono reveal" id="cert-filters"></div>
-      <div class="certs" id="certs"></div>
+    <section id="certifications" class="section wrap">
+      <div class="sec-label mono">Certifications</div>
+      <h2 class="sec-title reveal" id="cert-title"></h2>
+      <div class="chrono reveal" id="chrono"></div>
+      <div class="legend mono reveal" id="cert-legend"></div>
+      <div class="cert-table reveal" id="cert-table"></div>
     </section>
 
     <!-- PROJECTS -->
-    <section id="projects" class="section">
-      <header class="sec-head reveal">
-        <span class="tag mono tag-coral">OPERATIONS</span>
-        <h2>Projects &amp; labs</h2>
-        <p class="sec-lead">Things I built, run or break on purpose.</p>
-      </header>
-      <div class="pills mono reveal" id="filters"></div>
-      <div class="projects-grid" id="projects-grid"></div>
+    <section id="projects" class="section wrap">
+      <div class="sec-label mono">Projects</div>
+      <h2 class="sec-title reveal">Things I built, run, or <em>break on purpose.</em></h2>
+      <div class="filters mono reveal" id="filters"></div>
+      <div class="index" id="projects-index"></div>
     </section>
 
     <!-- RESEARCH -->
-    <section id="research" class="section">
-      <header class="sec-head reveal">
-        <span class="tag mono">INTEL</span>
-        <h2>Research &amp; writing</h2>
-        <p class="sec-lead" id="research-lead"></p>
-      </header>
+    <section id="research" class="section wrap">
+      <div class="sec-label mono">Research</div>
+      <h2 class="sec-title reveal" id="research-title"></h2>
       <div class="research-grid">
-        <div class="metrics glass reveal" id="metrics"></div>
-        <div class="papers reveal" id="papers"></div>
+        <div class="r-figures reveal" id="r-figures"></div>
+        <div class="bars reveal" id="paper-bars"></div>
       </div>
-      <h3 class="sub-head mono reveal">// LATEST NOTES</h3>
-      <div class="posts" id="posts"></div>
+      <h3 class="mono small-head spaced">Notes &amp; writing</h3>
+      <div class="notes" id="posts"></div>
     </section>
 
-    <!-- TERMINAL -->
-    <section id="terminal" class="section">
-      <header class="sec-head reveal">
-        <span class="tag mono tag-teal">SHELL</span>
-        <h2>Prefer the command line?</h2>
-        <p class="sec-lead">Type <code>help</code> and press Enter. Tab completes, arrow keys browse history.</p>
-      </header>
-      <div class="term reveal" id="shell">
-        <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title mono">guest@alnoman.infosec: ~</span></div>
-        <div class="term-body mono" id="shell-out"></div>
-        <div class="shell-input mono"><span class="ps1">guest@alnoman:~$</span><input id="shell-in" autocomplete="off" spellcheck="false" aria-label="Terminal input"></div>
+    <!-- SHELL -->
+    <section id="terminal" class="section wrap">
+      <div class="sec-label mono">Shell</div>
+      <div class="shell-grid">
+        <p class="shell-note reveal">Rather poke around from a terminal? Type <code>help</code>. There is a flag hidden somewhere.</p>
+        <div class="term reveal" id="shell">
+          <div class="term-out mono" id="shell-out"></div>
+          <div class="term-in mono"><span class="ps1">guest@alnoman:~$</span><input id="shell-in" autocomplete="off" spellcheck="false" aria-label="Terminal input"></div>
+        </div>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="section contact">
-      <div class="contact-box reveal">
-        <div class="ping" aria-hidden="true"><span></span><span></span><span></span><i></i></div>
-        <span class="tag mono">SECURE CHANNEL</span>
-        <h2>Let's build something secure</h2>
-        <p class="sec-lead">SOC builds, AppSec reviews, research collaboration, talks and training. My inbox is open.</p>
-        <a class="btn btn-primary big" id="mail-btn" href="#">Send a message</a>
-        <div class="socials center" id="contact-links"></div>
-      </div>
+    <section id="contact" class="section wrap contact">
+      <div class="sec-label mono">Contact</div>
+      <h2 class="contact-title reveal">Have a system that needs breaking, or a SOC that needs building? <a id="mail-big" href="#">Write to me.</a></h2>
+      <div class="contact-links mono reveal" id="contact-links"></div>
     </section>
   </main>
 
-  <footer class="footer mono">
-    <p><span id="foot-name"></span> &nbsp;|&nbsp; v<span id="version"></span> &nbsp;|&nbsp; updated <span id="updated"></span></p>
-    <p class="muted tiny">Stay curious. Stay ethical. Hack the planet, legally.</p>
+  <footer class="footer wrap mono">
+    <span id="foot-name"></span>
+    <span>v<span id="version"></span>, updated <span id="updated"></span></span>
+    <span>Dhaka, Bangladesh</span>
   </footer>
 
-  <script src="data/site.js?v=1.3.0"></script>
-  <script src="assets/js/main.js?v=1.3.0"></script>
+  <button class="to-top" id="to-top" aria-label="Back to top" title="Back to top">
+    <svg class="ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21"/><circle class="ring-val" id="ring-val" cx="24" cy="24" r="21"/></svg>
+    <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg>
+  </button>
+  <div class="tooltip mono" id="tip" role="tooltip"></div>
+
+  <script src="data/site.js?v=1.4.0"></script>
+  <script src="assets/js/main.js?v=1.4.0"></script>
 </body>
 </html>

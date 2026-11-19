@@ -6,14 +6,13 @@ Pure HTML, CSS and JavaScript. No build step, no framework, no dependencies. Hos
 
 ## Features
 
-- "Intel Map" theme: deep navy, amber / teal / coral / lilac / sky accents, HUD corner brackets, dot grid, topographic contours
-- Interactive constellation network background that reacts to the mouse
-- Hero with typed roles, radar and a "CASE FILE" dossier card with photo scan and stamp
-- Animated stats, colour coded skill cards, tool marquee, numbered career timeline
-- Filterable certifications and projects (OP-01, OP-02 ... with LIVE / LAB / IN PROGRESS status)
-- Research gauges (citations, h-index, i10) and paper cards
-- Interactive shell (`help`, `whoami`, `skills`, `projects`, `cat flag.txt` ...)
-- Mobile friendly dropdown menu, respects reduced motion
+- Editorial "research journal" design: paper and ink, one signal colour, serif display type
+- Light and dark mode (follows the OS, toggle in the nav, choice remembered)
+- Real charts built from the data: skill radar, career Gantt timeline, certification chronology, citation bars
+- Expandable project index with type filters and Live / Lab / In progress status
+- Back to top button with a reading progress ring
+- Interactive shell (`help`, `whoami`, `skills`, `projects`, `theme`, `cat flag.txt` ...)
+- Mobile friendly, respects reduced motion
 - Cache busting: the release script stamps `?v=<version>` on CSS/JS so visitors always get the new build
 
 ## Folder layout

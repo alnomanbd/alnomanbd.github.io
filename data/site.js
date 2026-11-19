@@ -12,7 +12,7 @@
   ============================================================
 */
 window.SITE = {
-  version: "1.3.0",
+  version: "1.4.0",
   updated: "2026-11-19",
 
   profile: {
@@ -31,6 +31,7 @@ window.SITE = {
     ],
     location: "Dhaka, Bangladesh",
     tagline: "I build SOCs, break applications on purpose and turn noisy logs into real alerts.",
+    lead: "I build and run **security operations**, secure the software delivery pipeline with **AppSec and DevSecOps**, hunt on the **dark web** for what leaks, and use **AI agents** to make defenders faster. Twelve years across banks, fintech, government and research.",
     about: [
       "I am a security engineer with more than a decade across offensive and defensive security. I design and run Security Operations Centers end to end: log pipelines, detection rules, SOAR automation, incident response and the dashboards that tell the story.",
       "My roots are in networking and infrastructure (Cisco CCNP Security, Fortinet NSE, Microsoft, VMware). On the offensive side I started as an application security and VAPT engineer, and today I hold the EC-Council CPENT and CEH. Lately I build AI-driven security: agentic workflows, RAG and automation that make a SOC faster. On the engineering side I build DevSecOps pipelines that push SAST, SCA and container findings into one place so developers can actually fix them.",
@@ -50,19 +51,7 @@ window.SITE = {
     },
     /* small glowing chips under the tagline. color: amber | teal | coral | lilac | sky */
     chips: [
-      { label: "SOC & Blue Team", color: "teal" },
-      { label: "DevSecOps", color: "amber" },
-      { label: "Offensive Security", color: "coral" },
-      { label: "AI Security", color: "lilac" },
-      { label: "Threat Intel", color: "sky" }
-    ],
-    /* rows on the "CASE FILE" card in the hero */
-    dossier: [
-      ["BASE", "Dhaka, Bangladesh"],
-      ["FOCUS", "SOC, DevSecOps, Offensive, CTI"],
-      ["CLEARANCE", "CPENT, CEH, CCNP Security"],
-      ["RESEARCH", "209 citations, h-index 4"],
-      ["STATUS", "Active, building secure systems"]
+      "SOC & Blue Team", "AppSec", "DevSecOps", "Offensive Security", "Dark Web & Threat Intel", "AI-Driven Security", "Cloud & Kubernetes", "GRC"
     ]
   },
 
@@ -74,69 +63,86 @@ window.SITE = {
   ],
 
   now: [
-    "Running and maturing a production SOC (Wazuh, TheHive, Cortex, MISP)",
-    "Building an AppSec pipeline into DefectDojo",
-    "Studying Kubernetes security (CKA / CKS track)",
-    "Deep diving into dark web intelligence and CTI",
+    "Running and maturing a production SOC: Wazuh, TheHive, Cortex, MISP",
+    "Pushing every SAST and SCA finding into DefectDojo for developers",
+    "Dark web and threat intelligence research for early breach warning",
+    "Building AI-driven SOC automation with agents, RAG and MCP",
+    "Kubernetes security on the CKA / CKS track",
     "Writing The Defensive Mind, an open SOC handbook"
   ],
 
   skills: [
     {
-      group: "SOC & Detection",
+      group: "SOC & Detection Engineering",
+      short: "SOC",
       color: "teal",
-      icon: "shield",
       level: 95,
-      items: ["Wazuh", "Elastic / ELK", "Splunk", "IBM QRadar", "Sigma", "MITRE ATT&CK", "Detection Engineering", "Log Pipelines"]
+      items: ["Wazuh", "Elastic / ELK", "Splunk", "IBM QRadar", "Sigma rules", "MITRE ATT&CK", "Use case design", "Log pipelines", "Dashboards"]
     },
     {
-      group: "Offensive Security",
+      group: "Incident Response & SOAR",
+      short: "IR / SOAR",
+      color: "lilac",
+      level: 90,
+      items: ["TheHive", "Cortex", "MISP", "n8n playbooks", "Triage", "Root cause analysis", "Threat hunting", "Forensics basics"]
+    },
+    {
+      group: "Offensive Security & VAPT",
+      short: "Offensive",
       color: "coral",
-      icon: "skull",
-      level: 88,
-      items: ["Web & API Pentest", "Network Pentest", "Burp Suite", "Nmap", "Metasploit", "Kali Linux", "OWASP Top 10", "Report Writing"]
-    },
-    {
-      group: "AppSec & DevSecOps",
-      color: "amber",
-      icon: "code",
       level: 90,
-      items: ["SonarQube", "Dependency-Track", "DefectDojo", "Jenkins", "Trivy", "SAST / SCA / DAST", "Secure SDLC", "Threat Modeling"]
+      items: ["Web & API pentest", "Network pentest", "Burp Suite", "Nmap", "Metasploit", "sqlmap", "Nuclei", "Kali Linux", "Reporting"]
     },
     {
-      group: "SOAR & Incident Response",
-      color: "lilac",
-      icon: "bolt",
-      level: 90,
-      items: ["TheHive", "Cortex", "MISP", "n8n Automation", "Playbooks", "Triage", "Forensics Basics", "Threat Hunting"]
-    },
-    {
-      group: "Cloud & Infrastructure",
-      color: "sky",
-      icon: "cloud",
-      level: 80,
-      items: ["AWS", "Kubernetes", "Docker", "Linux Hardening", "Cloudflare WAF", "Terraform", "Networking", "Bash / PowerShell"]
-    },
-    {
-      group: "AI Security & Automation",
-      color: "lilac",
-      icon: "cpu",
-      level: 80,
-      items: ["Agentic AI", "Agentic Workflows", "RAG", "MCP", "LLM Security", "n8n Automation", "CI/CD Automation", "AI-Driven SOC"]
-    },
-    {
-      group: "Network Security",
-      color: "sky",
-      icon: "net",
-      level: 88,
-      items: ["Cisco (CCNP Security)", "Fortinet", "Firewalls", "VPN", "IDS / IPS", "Routing & Switching", "Active Directory", "VMware"]
-    },
-    {
-      group: "Threat Intel & GRC",
+      group: "Application Security",
+      short: "AppSec",
       color: "amber",
-      icon: "eye",
+      level: 90,
+      items: ["OWASP Top 10", "OWASP API Top 10", "Secure code review", "Threat modeling", "SAST / DAST", "API security", "PCI secure software", "Developer training"]
+    },
+    {
+      group: "DevSecOps & CI/CD",
+      short: "DevSecOps",
+      color: "amber",
+      level: 90,
+      items: ["Jenkins", "GitHub Actions", "GitLab CI", "Azure DevOps", "SonarQube", "Dependency-Track", "DefectDojo", "Trivy", "Secrets scanning"]
+    },
+    {
+      group: "Dark Web Research & Threat Intel",
+      short: "Dark Web / CTI",
+      color: "lilac",
+      level: 86,
+      items: ["Dark web monitoring", "Leak and breach hunting", "Threat actor profiling", "OSINT", "Tor / Whonix OPSEC", "MISP / STIX", "Threat feeds", "Intel reporting"],
+      isNew: true
+    },
+    {
+      group: "AI-Driven Security",
+      short: "AI Security",
+      color: "coral",
+      level: 84,
+      items: ["Agentic AI", "Agentic workflows", "RAG", "MCP", "LLM security testing", "AI SOC automation", "Prompt injection defense", "n8n + LLM"],
+      isNew: true
+    },
+    {
+      group: "Cloud & Kubernetes Security",
+      short: "Cloud / K8s",
+      color: "sky",
       level: 82,
-      items: ["OSINT", "Dark Web Monitoring", "Threat Feeds", "ISO 27001", "PCI DSS", "SOC 2", "NIST CSF", "Risk Assessment"]
+      items: ["AWS", "Kubernetes (CKA / CKS track)", "Docker", "kube-bench", "Terraform", "Cloudflare WAF", "Linux hardening"]
+    },
+    {
+      group: "Network & Infrastructure Security",
+      short: "Network",
+      color: "sky",
+      level: 88,
+      items: ["Cisco (CCNP Security)", "Fortinet (NSE)", "Firewalls", "VPN", "IDS / IPS", "Routing & switching", "Active Directory", "VMware"]
+    },
+    {
+      group: "GRC & Security Awareness",
+      short: "GRC",
+      color: "teal",
+      level: 82,
+      items: ["ISO 27001", "PCI DSS", "SOC 2", "NIST CSF", "Risk assessment", "Policies & SOPs", "Audit prep", "Awareness programs"]
     }
   ],
 
@@ -405,6 +411,7 @@ window.SITE = {
   ],
 
   research: {
+    headline: "Peer-reviewed work on fog, cloud and IoT security,",
     summary: "Peer-reviewed research on fog, cloud and IoT security: authentication, access control, trust management and blockchain based defenses. Started during my M.Sc. at NJUST.",
     citations: 209,
     hIndex: 4,

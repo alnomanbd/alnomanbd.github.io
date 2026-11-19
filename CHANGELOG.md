@@ -3,6 +3,10 @@
 All notable changes to this website. Newest first.
 Versioning: MAJOR.MINOR.PATCH (major = redesign, minor = new section/feature, patch = content or fix).
 
+## [1.4.0] - 2026-11-19
+
+- Editorial redesign: light and dark mode, photo logo and favicon, skill radar, career Gantt, certification chronology, citation bars, project index, back to top, 10 skill domains incl. dark web and AI-driven security
+
 ## [1.3.0] - 2026-11-19
 
 - Intel Map redesign (constellation background, dossier hero, radar, gauges), 13 projects with filters and status, menu without numbers, mobile dropdown menu, cache busting
