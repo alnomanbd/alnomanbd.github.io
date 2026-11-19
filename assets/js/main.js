@@ -384,7 +384,7 @@
         const n = Math.round((g.level || 0) / 5);
         return `<span class="c">${esc(g.group.padEnd(26))}</span> <span class="p">${"#".repeat(n)}</span><span class="d">${".".repeat(20 - n)}</span> ${g.level}%`;
       }).join("\n"),
-      experience: () => (S.experience || []).map((e) => `<span class="y">${esc(e.period.padEnd(12))}</span> ${esc(e.role)} <span class="d">@ ${esc(e.org)}</span>`).join("\n"),
+      experience: () => (S.experience || []).map((e) => `<span class="y">${esc(e.period.padEnd(20))}</span> ${esc(e.role)} <span class="d">@ ${esc(e.org)}</span>`).join("\n"),
       projects: () => (S.projects || []).map((p) => `<span class="p">${esc(p.name)}</span> <span class="d">[${esc(p.type)}]</span>\n  ${esc(p.desc)}${p.url ? `\n  <a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.url)}</a>` : ""}`).join("\n\n"),
       certs: () => (S.certifications || []).map((c) => `${c.status === "in-progress" ? '<span class="y">[~]</span>' : '<span class="p">[+]</span>'} ${esc(c.short.padEnd(7))} <span class="d">${esc(c.name)} | ${esc(c.issuer)}${c.year ? " | " + esc(c.year) : ""}</span>`).join("\n"),
       education: () => (S.education || []).map((e) => `<span class="y">${esc(e.period.padEnd(20))}</span> ${esc(e.degree)} <span class="d">@ ${esc(e.school)}</span>`).join("\n"),

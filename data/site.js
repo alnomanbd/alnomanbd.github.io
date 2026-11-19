@@ -12,7 +12,7 @@
   ============================================================
 */
 window.SITE = {
-  version: "1.1.0",
+  version: "1.2.0",
   updated: "2026-11-19",
 
   profile: {
@@ -51,7 +51,7 @@ window.SITE = {
   },
 
   stats: [
-    { value: 15, suffix: "+", label: "Years in IT & security" },
+    { value: 12, suffix: "+", label: "Years in industry" },
     { value: 209, suffix: "", label: "Research citations" },
     { value: 18, suffix: "", label: "Certifications" },
     { value: 95, suffix: "+", label: "Handbook pages published" }
@@ -118,9 +118,9 @@ window.SITE = {
 
   experience: [
     {
-      role: "Senior Security Engineer",
+      role: "Senior Cybersecurity Engineer",
       org: "Synesis IT PLC",
-      period: "Present",
+      period: "Mar 2026 - Present",
       location: "Dhaka, Bangladesh",
       points: [
         "Designed, built and operate the company SOC: SIEM, detection rules, dashboards and on-call alerting.",
@@ -128,31 +128,66 @@ window.SITE = {
         "Run DevSecOps: SAST, SCA and container scanning pipelines feeding a central vulnerability platform.",
         "Lead VAPT on web, API and infrastructure, and handle incident response end to end."
       ],
-      tags: ["SOC", "DevSecOps", "VAPT", "IR"]
+      tags: ["SOC", "DevSecOps", "VAPT", "IR", "AI Automation"]
     },
     {
-      role: "Graduate Researcher (M.Sc.)",
+      role: "DevOps & DevSecOps Engineer",
+      org: "United Commercial Bank PLC",
+      period: "Mar 2025 - Feb 2026",
+      location: "Dhaka, Bangladesh",
+      points: [
+        "Built and managed CI/CD pipelines with Jenkins, GitHub Actions, GitLab CI and Azure DevOps.",
+        "Embedded security into the pipeline: SAST, SCA, secret scanning and container image checks.",
+        "Automated build, test and release for banking applications in a regulated environment."
+      ],
+      tags: ["DevOps", "DevSecOps", "CI/CD", "Banking"]
+    },
+    {
+      role: "Information Security Analyst",
+      org: "Upay (UCB Fintech Company Limited)",
+      period: "Aug 2021 - Mar 2025",
+      location: "Dhaka, Bangladesh",
+      points: [
+        "Worked closely with core teams to mitigate threats and improve the security posture of a mobile financial service.",
+        "Performed root cause analysis (RCA) for security incidents and drove the fixes.",
+        "Security research, vulnerability assessment and cyber defense for fintech platforms."
+      ],
+      tags: ["Cyber Defense", "Fintech", "Incident Response", "Security Research"]
+    },
+    {
+      role: "IT Consultant",
+      org: "Bangladesh Coast Guard Headquarters",
+      period: "May 2020 - Apr 2021",
+      location: "Dhaka, Bangladesh",
+      points: [
+        "Architected and secured the Coast Guard Resource Planning Management System (CGRPMS).",
+        "Source code reviews, secure coding practices and infrastructure hardening aligned with national government standards.",
+        "Vulnerability assessment and penetration testing (VAPT) of the application and infrastructure."
+      ],
+      tags: ["VAPT", "Application Security", "Government"]
+    },
+    {
+      role: "Research Assistant (M.Sc.)",
       org: "Nanjing University of Science and Technology",
-      period: "2016 - 2019",
+      period: "Aug 2016 - Nov 2019",
       location: "Nanjing, China",
       points: [
-        "Research in network and information security.",
-        "Research Assistant, School of Computer Science: fog, cloud and IoT security.",
+        "School of Computer Science: research in cloud, fog and IoT security.",
         "Designed FogAuthChain, a blockchain based location aware authentication scheme (Computer Communications, 82 citations).",
         "Published peer-reviewed papers and surveys with 200+ citations."
       ],
-      tags: ["Research", "Network Security"]
+      tags: ["Research", "Fog Security", "Blockchain"]
     },
     {
-      role: "Application Security & VAPT Engineer",
-      org: "Creative IT",
-      period: "2014 - 2016",
-      location: "Bangladesh",
+      role: "Web Developer",
+      org: "Creative IT Limited",
+      period: "Feb 2014 - Apr 2016",
+      location: "Dhaka, Bangladesh",
       points: [
-        "Performed web application security assessments and penetration tests.",
-        "Worked with developers to fix vulnerabilities and harden applications."
+        "Built secure-by-design dynamic web applications using PHP, MySQL and JavaScript.",
+        "Conducted manual source code reviews and black-box security testing for enterprise client projects."
       ],
-      tags: ["AppSec", "Pentest"]
+      tags: ["Web Development", "Secure Coding", "AppSec"]
     }
   ],
 
