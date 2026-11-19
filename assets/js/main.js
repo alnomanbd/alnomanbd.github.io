@@ -228,7 +228,7 @@
     $("#hero-chips").innerHTML = (P.chips || []).map((c, i) => {
       const label = c.label || c;
       const flag = "--" + label.toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-      return `<span style="--c:${col(c.color, i)}">${esc(flag)}</span>`;
+      return `<span style="--c:${col(c.color, i)}"><b>--</b>${esc(flag.slice(2))}</span>`;
     }).join(" ");
     // typed prompt, then decrypt the name
     const cmd = "./identify --target self", cEl = $("#h-cmd");

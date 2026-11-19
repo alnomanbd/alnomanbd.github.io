@@ -3,6 +3,10 @@
 All notable changes to this website. Newest first.
 Versioning: MAJOR.MINOR.PATCH (major = redesign, minor = new section/feature, patch = content or fix).
 
+## [1.6.1] - 2026-11-19
+
+- Hero sits higher, name back to bold two-line style with decrypt, tidy flag pills
+
 ## [1.6.0] - 2026-11-19
 
 - Hacker style hero: terminal prompt, decrypting name with outline shadow and glitch, redacted tagline that declassifies, CLI style focus flags, command style buttons

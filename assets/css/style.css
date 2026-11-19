@@ -717,3 +717,30 @@ code { font-family: var(--mono); font-size: .9em; color: var(--amber); backgroun
 @media (prefers-reduced-motion: reduce) {
   .rd { color: var(--text); background-size: 0 0; }
 }
+
+/* ============================================================
+   v1.6.1 hero left refinement: hero sits higher, name back to
+   the bold two-line style, tidy flags
+   ============================================================ */
+.hero { min-height: auto; padding-top: 104px; justify-content: flex-start; }
+.hero-inner { align-items: center; }
+.h-prompt { font-size: .86rem; margin-bottom: 14px; }
+.h-name { display: block; font-family: var(--head); font-weight: 800; font-size: clamp(2.9rem, 6.4vw, 5.3rem); line-height: .98; letter-spacing: -1px; }
+.h-first, .h-last { display: block; font-family: inherit; font-size: inherit; font-weight: inherit; letter-spacing: inherit; text-transform: none; padding: 0; line-height: inherit; }
+.h-first { color: var(--text); }
+.h-last { color: var(--amber); align-self: auto; }
+.h-last::before { display: none; }
+.h-last::after { color: var(--teal); }
+.h-last .dc, .h-first .dc { color: var(--teal); opacity: .9; }
+.h-role { margin: 18px 0 14px; }
+.h-tag { margin-bottom: 20px; }
+.h-flags { gap: 8px; margin-bottom: 26px; font-size: .76rem; }
+.h-flags span { color: var(--text2); padding: 5px 11px; border: 1px solid var(--line); border-radius: 6px; background: rgba(255,255,255,.03); transition: border-color .2s, color .2s; }
+.h-flags span::after { display: none; }
+.h-flags span::first-letter { color: var(--c); }
+.h-flags span b { color: var(--c); font-weight: 500; }
+.h-flags span:hover { color: var(--text); border-color: var(--c); }
+:root[data-theme="light"] .h-flags span { background: rgba(255,255,255,.7); }
+.hero .stats { margin-top: 48px; }
+@media (max-width: 980px) { .hero { padding-top: 96px; } }
+@media (max-width: 640px) { .hero { padding-top: 88px; } .h-name { font-size: clamp(2.6rem, 12vw, 3.4rem); } }
