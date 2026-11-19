@@ -3,6 +3,10 @@
 All notable changes to this website. Newest first.
 Versioning: MAJOR.MINOR.PATCH (major = redesign, minor = new section/feature, patch = content or fix).
 
+## [1.8.0] - 2026-11-19
+
+- Unique pieces: live threat map background (simulated attacks to Dhaka) replaces particles, operator console hero (status bar, callsign, mission briefing, loadout meters), git log style career
+
 ## [1.7.1] - 2026-11-19
 
 - Justify the About (Who I am) text

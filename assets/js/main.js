@@ -100,20 +100,7 @@
     $("#arsenal").innerHTML = ars + ars;
 
     // experience
-    const exp = S.experience || [];
-    $("#timeline").innerHTML = exp.map((e, i) => {
-      const cur = /present|now|current/i.test(e.period);
-      const c = col(e.color, i);
-      return `<div class="tl-item reveal ${cur ? "current" : ""}" id="tl-${i}" style="--c:${c}">
-        <div class="tl-dot">${String(exp.length - i).padStart(2, "0")}</div>
-        <div class="tl-card">
-          <div class="tl-top"><h4>${esc(e.role)}${cur ? '<span class="live">ACTIVE</span>' : ""}</h4><span class="tl-period">${esc(e.period)}</span></div>
-          <div class="tl-org"><b>${esc(e.org)}</b>${e.location ? ` &nbsp;|&nbsp; ${esc(e.location)}` : ""}</div>
-          <ul>${(e.points || []).map((p) => `<li>${esc(p)}</li>`).join("")}</ul>
-          <div class="tags">${tagList(e.tags)}</div>
-        </div>
-      </div>`;
-    }).join("");
+    renderGitLog();
     renderGantt();
     $("#edu").innerHTML = (S.education || []).map((e) => `
       <div class="edu-item reveal"><span class="tl-period">${esc(e.period)}</span><h5>${esc(e.degree)}</h5>${e.school ? `<div class="school">${esc(e.school)}</div>` : ""}${e.note ? `<p>${esc(e.note)}</p>` : ""}</div>`).join("");
@@ -224,19 +211,47 @@
     let k = 0;
     $("#hero-tag").innerHTML = esc(P.tagline || "").replace(/\{\{(.+?)\}\}/g, (_, w) => `<span class="rd" data-k="${k++}">${w}</span>`);
     $$("#hero-tag .rd").forEach((r) => setTimeout(() => r.classList.add("open"), reduced ? 0 : 1500 + Number(r.dataset.k) * 600));
-    // focus areas as command line flags
-    $("#hero-chips").innerHTML = (P.chips || []).map((c, i) => {
-      const label = c.label || c;
-      const flag = "--" + label.toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-      return `<span style="--c:${col(c.color, i)}"><b>--</b>${esc(flag.slice(2))}</span>`;
-    }).join(" ");
-    // typed prompt, then decrypt the name
-    const cmd = "./identify --target self", cEl = $("#h-cmd");
-    if (reduced) { cEl.textContent = cmd; return; }
-    let i = 0;
-    (function type() { cEl.textContent = cmd.slice(0, ++i); if (i < cmd.length) setTimeout(type, 38 + Math.random() * 40); })();
+    // loadout: skill meters built from the skills list
+    const pick = (P.loadout && P.loadout.length ? P.loadout : (S.skills || []).slice(0, 6).map((x) => x.short || x.group));
+    $("#hero-chips").innerHTML = pick.map((name) => (S.skills || []).find((x) => (x.short || x.group) === name)).filter(Boolean).map((x, i) => {
+      const lvl = Number(x.level) || 0, on = Math.round(lvl / 10);
+      return `<div class="lo" style="--c:${col(x.color, i)}" title="${esc(x.group)}"><span class="lo-n">${esc(x.short || x.group)}</span><span class="lo-bar">${Array.from({ length: 10 }, (_, k) => `<i class="${k < on ? "on" : ""}" style="--k:${k}"></i>`).join("")}</span><span class="lo-v">${lvl}</span></div>`;
+    }).join("");
+    if (reduced) return;
     decrypt(fEl, first, 900, 500);
     decrypt(lEl, last, 1300, 700);
+  }
+
+
+  /* ---------- experience: git log --graph ---------- */
+  function renderGitLog() {
+    const exp = S.experience || [];
+    const hash = (str) => { let x = 2166136261; for (const ch of str) { x ^= ch.charCodeAt(0); x = Math.imul(x, 16777619) >>> 0; } return x.toString(16).padStart(8, "0").slice(0, 7); };
+    const isRes = (e) => /research|university/i.test(e.role + " " + e.org);
+    $("#timeline").innerHTML = `<div class="gl-head mono"><span class="gl-ps">alnoman@career:~$</span> git log --graph --decorate career <span class="gl-hint">click a commit to view the diff</span></div>` +
+      exp.map((e, i) => {
+        const cur = /present|now|current/i.test(e.period);
+        const r = span(e.period), dur = Math.max(1, Math.round((r[1] - r[0]) * 12));
+        const durTxt = [Math.floor(dur / 12) ? Math.floor(dur / 12) + " yr" : "", dur % 12 ? (dur % 12) + " mo" : ""].filter(Boolean).join(" ");
+        const ref = cur ? '<span class="gl-ref head">HEAD -&gt; current</span>' : i === exp.length - 1 ? '<span class="gl-ref">tag: first-commit</span>' : "";
+        return `<div class="gl-item reveal${i === 0 ? " open" : ""}${isRes(e) ? " branch" : ""}${cur ? " current" : ""}" id="tl-${i}" style="--c:${col(e.color, i)}">
+          <div class="gl-graph" aria-hidden="true"><span class="gl-node"></span></div>
+          <div class="gl-body">
+            <button class="gl-commit mono" aria-expanded="${i === 0}"><span class="gl-star">*</span> <span class="gl-hash">${hash(e.org + e.period)}</span> ${ref} <span class="gl-date">${esc(e.period)}</span><span class="gl-dur">${esc(durTxt)}</span></button>
+            <h4>${esc(e.role)}</h4>
+            <p class="gl-org"><b>${esc(e.org)}</b>${e.location ? `, ${esc(e.location)}` : ""}${isRes(e) ? ' <span class="gl-branch mono">branch: research</span>' : ""}</p>
+            <div class="gl-diff"><div class="gl-diff-in mono">
+              <p class="gl-stat">${(e.points || []).length} additions, 0 deletions</p>
+              ${(e.points || []).map((p) => `<p class="add"><b>+</b> ${esc(p)}</p>`).join("")}
+              <p class="gl-tags">${(e.tags || []).map((t) => `<span>#${esc(t.toLowerCase().replace(/[^a-z0-9]+/g, "-"))}</span>`).join(" ")}</p>
+            </div></div>
+          </div>
+        </div>`;
+      }).join("");
+    $$("#timeline .gl-commit").forEach((btn) => btn.addEventListener("click", () => {
+      const item = btn.closest(".gl-item"), open = !item.classList.contains("open");
+      item.classList.toggle("open", open); btn.setAttribute("aria-expanded", open);
+    }));
   }
 
   /* ---------- tooltip ---------- */
@@ -399,51 +414,147 @@
     })();
   }
 
-  /* ---------- constellation network ---------- */
+  /* ---------- live threat map (simulated) ---------- */
   function network() {
     const c = $("#net");
     if (reduced) { c.style.display = "none"; return; }
     const ctx = c.getContext("2d");
-    let w, h, nodes, dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const mouse = { x: -999, y: -999 };
-    const palette = ["52,227,196", "255,59,79", "125,211,252"];
+    const root = document.documentElement;
+    // land as longitude ranges per 5 degree latitude band (rough equirectangular world)
+    const LAND = {
+      75: [[-120, -75], [-70, -20], [55, 140]],
+      70: [[-165, -140], [-140, -60], [-55, -20], [15, 30], [30, 180]],
+      65: [[-165, -140], [-140, -62], [-50, -25], [-22, -14], [5, 30], [30, 180]],
+      60: [[-160, -140], [-135, -65], [-48, -40], [5, 30], [30, 170]],
+      55: [[-130, -60], [-8, 0], [5, 40], [40, 162]],
+      50: [[-125, -56], [-5, 1], [-2, 40], [40, 140]],
+      45: [[-124, -65], [-1, 40], [40, 135], [140, 145]],
+      40: [[-124, -75], [-9, 3], [12, 28], [27, 45], [45, 122], [126, 129], [135, 141]],
+      35: [[-120, -77], [-6, 10], [35, 60], [60, 120], [132, 140]],
+      30: [[-115, -81], [-10, 32], [35, 60], [65, 122]],
+      25: [[-110, -97], [-82, -80], [-15, 35], [37, 57], [68, 92], [100, 120]],
+      20: [[-105, -87], [-80, -75], [-17, 38], [40, 55], [72, 86], [95, 110]],
+      15: [[-92, -84], [-17, 42], [44, 50], [74, 80], [98, 109], [120, 125]],
+      10: [[-85, -77], [-75, -62], [-15, 45], [48, 51], [77, 79], [98, 106], [122, 126]],
+      5: [[-78, -50], [-10, 48], [100, 104], [110, 118]],
+      0: [[-80, -48], [9, 42], [98, 105], [110, 118], [120, 125]],
+      "-5": [[-80, -35], [12, 40], [105, 140], [140, 150]],
+      "-10": [[-77, -37], [13, 40], [130, 142], [142, 150]],
+      "-15": [[-75, -39], [13, 40], [45, 50], [124, 145]],
+      "-20": [[-70, -40], [13, 35], [44, 49], [114, 150]],
+      "-25": [[-70, -45], [15, 33], [113, 153]],
+      "-30": [[-72, -50], [17, 31], [115, 153]],
+      "-35": [[-72, -57], [18, 25], [117, 150], [173, 178]],
+      "-40": [[-73, -62], [145, 148], [172, 176]],
+      "-45": [[-75, -65], [168, 171]],
+      "-50": [[-75, -68]],
+      "-55": [[-71, -67]]
+    };
+    const isLand = (lon, lat) => {
+      const band = LAND[Math.round(lat / 5) * 5];
+      return !!band && band.some(([a, b]) => lon >= a && lon <= b);
+    };
+    const HOME = { name: "DHAKA", lon: 90.4, lat: 23.8 };
+    const SOURCES = [
+      ["RU", 37.6, 55.7], ["CN", 116.4, 39.9], ["BR", -46.6, -23.5], ["US", -74, 40.7], ["NL", 4.9, 52.4],
+      ["NG", 3.4, 6.5], ["IR", 51.4, 35.7], ["KP", 125.7, 39], ["DE", 8.7, 50.1], ["US", -77.5, 39],
+      ["SG", 103.8, 1.4], ["UA", 30.5, 50.4], ["HK", 114.2, 22.3], ["VN", 105.8, 21], ["TR", 29, 41],
+      ["RO", 26.1, 44.4], ["IN", 72.9, 19.1], ["PK", 67, 24.9], ["ZA", 28, -26.2], ["AU", 151.2, -33.9]
+    ];
+    const OTHER_TARGETS = [["GB", -0.1, 51.5], ["JP", 139.7, 35.7], ["US", -122.4, 37.8], ["AE", 55.3, 25.2], ["AU", 151.2, -33.9]];
+    const TYPES = [["DDoS", "--coral"], ["SSH brute force", "--amber"], ["Malware C2", "--lilac"], ["Phishing kit", "--sky"], ["Exploit attempt", "--amber"], ["Credential stuffing", "--coral"], ["Port scan", "--teal"]];
+    let w, h, s, ox, oy, dots = [], dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const proj = (lon, lat) => [ox + (lon + 180) * s, oy + (80 - lat) * s];
     const make = () => {
       w = innerWidth; h = innerHeight;
       c.width = w * dpr; c.height = h * dpr; c.style.width = w + "px"; c.style.height = h + "px";
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const n = Math.round(Math.min(90, (w * h) / 16000));
-      nodes = Array.from({ length: n }, () => ({
-        x: Math.random() * w, y: Math.random() * h,
-        vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .25,
-        r: Math.random() * 1.6 + .8, c: palette[Math.random() < .7 ? 0 : Math.random() < .6 ? 1 : 2]
-      }));
+      s = w >= h ? w / 360 : Math.max(w / 360, h / 260); // full world on desktop, zoomed toward Dhaka on phones
+      const mapW = 360 * s;
+      // keep Dhaka in view on narrow screens
+      ox = mapW > w ? Math.min(0, Math.max(w - mapW, w * 0.62 - (HOME.lon + 180) * s)) : (w - mapW) / 2;
+      oy = (h - 145 * s) / 2;
+      dots = [];
+      const step = s > 5 ? 2 : 2.5;
+      for (let lat = 78; lat > -58; lat -= step) for (let lon = -178; lon < 180; lon += step) if (isLand(lon, lat)) dots.push(proj(lon, lat));
     };
     make(); addEventListener("resize", make);
-    addEventListener("mousemove", (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
-    addEventListener("mouseout", () => { mouse.x = mouse.y = -999; });
-    const LINK = 130;
-    (function tick() {
+    const cssVar = (n) => getComputedStyle(root).getPropertyValue(n).trim() || "#ff3b4f";
+    const hexA = (hex, a) => { const m = hex.replace("#", ""); const n = parseInt(m.length === 3 ? m.replace(/./g, "$&$&") : m, 16); return `rgba(${n >> 16 & 255},${n >> 8 & 255},${n & 255},${a})`; };
+    const arcs = [], hits = [];
+    const log = $("#tm-log"), count = $("#tm-count");
+    const t0 = new Date(); let blocked = Math.floor((t0.getHours() * 3600 + t0.getMinutes() * 60 + t0.getSeconds()) * 0.37) + 1200;
+    if (count) count.textContent = blocked.toLocaleString("en-US");
+    function spawn() {
+      const src = SOURCES[(Math.random() * SOURCES.length) | 0];
+      const home = Math.random() < 0.72;
+      const dst = home ? ["BD", HOME.lon, HOME.lat] : OTHER_TARGETS[(Math.random() * OTHER_TARGETS.length) | 0];
+      if (src[1] === dst[1]) return;
+      const type = TYPES[(Math.random() * TYPES.length) | 0];
+      arcs.push({ a: [src[1], src[2]], b: [dst[1], dst[2]], t: 0, v: 0.006 + Math.random() * 0.006, col: cssVar(type[1]), home, src: src[0], dst: dst[0], type: type[0] });
+    }
+    function addLog(a) {
+      if (!log) return;
+      const d = new Date().toISOString().slice(11, 19);
+      const row = document.createElement("div");
+      row.innerHTML = `<span class="d">${d}</span> <b style="color:${a.col}">${a.home ? "BLOCKED" : "OBSERVED"}</b> ${esc(a.type)} <span class="d">${a.src} &gt; ${a.dst}</span>`;
+      log.prepend(row);
+      while (log.children.length > 4) log.lastChild.remove();
+    }
+    let last = 0, nextSpawn = 0;
+    (function tick(now) {
       requestAnimationFrame(tick);
-      if (document.hidden) return;
+      if (document.hidden || now - last < 33) return;
+      last = now;
+      const light = root.dataset.theme === "light";
       ctx.clearRect(0, 0, w, h);
-      for (const p of nodes) {
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > w) p.vx *= -1;
-        if (p.y < 0 || p.y > h) p.vy *= -1;
-        const dx = mouse.x - p.x, dy = mouse.y - p.y, d = Math.hypot(dx, dy);
-        if (d < 160) { p.x -= dx * .004; p.y -= dy * .004; }
-      }
-      for (let i = 0; i < nodes.length; i++) {
-        const a = nodes[i];
-        for (let j = i + 1; j < nodes.length; j++) {
-          const b = nodes[j], d = Math.hypot(a.x - b.x, a.y - b.y);
-          if (d < LINK) { ctx.strokeStyle = `rgba(${a.c},${(1 - d / LINK) * .22})`; ctx.lineWidth = .8; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+      ctx.fillStyle = light ? "rgba(20,30,60,.22)" : "rgba(154,166,196,.26)";
+      const r = Math.max(1.3, s * 0.55);
+      for (const [x, y] of dots) ctx.fillRect(x - r / 2, y - r / 2, r, r);
+      if (now > nextSpawn && arcs.length < 9) { spawn(); nextSpawn = now + 350 + Math.random() * 900; }
+      // home shield
+      const [hx, hy] = proj(HOME.lon, HOME.lat), teal = cssVar("--teal");
+      const pulse = (now / 1600) % 1;
+      ctx.strokeStyle = hexA(teal, 0.6 * (1 - pulse)); ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.arc(hx, hy, 6 + pulse * 26, 0, Math.PI * 2); ctx.stroke();
+      ctx.fillStyle = teal; ctx.beginPath(); ctx.arc(hx, hy, 3.2, 0, Math.PI * 2); ctx.fill();
+      ctx.font = "600 10px 'JetBrains Mono', monospace"; ctx.fillStyle = hexA(teal, 0.85);
+      ctx.fillText(HOME.name + " // DEFENDED", hx + 10, hy - 8);
+      for (let i = arcs.length - 1; i >= 0; i--) {
+        const a = arcs[i];
+        a.t += a.v;
+        const [x1, y1] = proj(a.a[0], a.a[1]), [x2, y2] = proj(a.b[0], a.b[1]);
+        const dist = Math.hypot(x2 - x1, y2 - y1);
+        const cx = (x1 + x2) / 2, cy = (y1 + y2) / 2 - dist * 0.32;
+        const at = (t) => [(1 - t) * (1 - t) * x1 + 2 * (1 - t) * t * cx + t * t * x2, (1 - t) * (1 - t) * y1 + 2 * (1 - t) * t * cy + t * t * y2];
+        const head = Math.min(a.t, 1), tail = Math.max(0, a.t - 0.35);
+        const N = 18;
+        for (let k = 0; k < N; k++) {
+          const ta = tail + (head - tail) * (k / N), tb = tail + (head - tail) * ((k + 1) / N);
+          const [ax, ay] = at(ta), [bx, by] = at(tb);
+          ctx.strokeStyle = hexA(a.col, (k / N) * 0.9); ctx.lineWidth = 2.2;
+          ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke();
         }
-        const md = Math.hypot(a.x - mouse.x, a.y - mouse.y);
-        if (md < 180) { ctx.strokeStyle = `rgba(255,59,79,${(1 - md / 180) * .35})`; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke(); }
-        ctx.fillStyle = `rgba(${a.c},.75)`; ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2); ctx.fill();
+        if (a.t < 1) {
+          const [px, py] = at(head);
+          ctx.fillStyle = a.col; ctx.beginPath(); ctx.arc(px, py, 3.2, 0, Math.PI * 2); ctx.fill();
+        }
+        // source blip
+        ctx.fillStyle = hexA(a.col, 0.7); ctx.beginPath(); ctx.arc(x1, y1, 2, 0, Math.PI * 2); ctx.fill();
+        if (a.t >= 1 && !a.done) {
+          a.done = true; hits.push({ x: x2, y: y2, t: 0, col: a.home ? teal : a.col });
+          addLog(a);
+          if (a.home && count) count.textContent = (++blocked).toLocaleString("en-US");
+        }
+        if (a.t > 1.35) arcs.splice(i, 1);
       }
-    })();
+      for (let i = hits.length - 1; i >= 0; i--) {
+        const p = hits[i]; p.t += 0.04;
+        ctx.strokeStyle = hexA(p.col, 1 - p.t); ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.arc(p.x, p.y, 4 + p.t * 18, 0, Math.PI * 2); ctx.stroke();
+        if (p.t >= 1) hits.splice(i, 1);
+      }
+    })(0);
   }
 
   /* ---------- topographic contours ---------- */

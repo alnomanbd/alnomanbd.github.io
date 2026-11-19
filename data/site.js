@@ -12,7 +12,7 @@
   ============================================================
 */
 window.SITE = {
-  version: "1.7.1",
+  version: "1.8.0",
   updated: "2026-11-19",
 
   profile: {
@@ -32,6 +32,8 @@ window.SITE = {
     /* shown in the hero photo scan readout */
     specialty: "Offensive security, dark web intel",
     clearance: "CPENT / CEH / CCNP-S",
+    /* skills shown as the LOADOUT meters in the hero (use the "short" names from skills) */
+    loadout: ["Offensive", "Dark Web / CTI", "SOC", "AppSec", "DevSecOps", "AI Security"],
     location: "Dhaka, Bangladesh",
     tagline: "Ethical hacker and dark web researcher. I break into systems {{with written permission}}, hunt {{leaked credentials and data}} in places most people never go, and build the {{SOCs that catch attackers}}.",
     lead: "I build and run **security operations**, secure the software delivery pipeline with **AppSec and DevSecOps**, hunt on the **dark web** for what leaks, and use **AI agents** to make defenders faster. Twelve years across banks, fintech, government and research.",
