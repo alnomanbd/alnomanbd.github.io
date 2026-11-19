@@ -6,14 +6,17 @@ Pure HTML, CSS and JavaScript. No build step, no framework, no dependencies. Hos
 
 ## Features
 
-- Editorial "research journal" design: paper and ink, one signal colour, serif display type
-- Light and dark mode (follows the OS, toggle in the nav, choice remembered)
-- Real charts built from the data: skill radar, career Gantt timeline, certification chronology, citation bars
-- Expandable project index with type filters and Live / Lab / In progress status
-- Back to top button with a reading progress ring
-- Interactive shell (`help`, `whoami`, `skills`, `projects`, `theme`, `cat flag.txt` ...)
-- Mobile friendly, respects reduced motion
-- Cache busting: the release script stamps `?v=<version>` on CSS/JS so visitors always get the new build
+- Dark "intel map" hacker theme: navy, amber / teal / coral / lilac / sky, HUD brackets, dot grid, contours, boot screen
+- Interactive constellation network background
+- Hero with typed roles (Ethical Hacker, Dark Web Researcher ...) and a face recognition style scan of the portrait
+- Scrolling intel feed under the hero (edit `ticker` in data/site.js)
+- Charts built from the data: skill radar, career Gantt timeline, certification chronology, citation bars
+- Filterable certifications and projects with Live / Lab / In progress status
+- Light and dark mode toggle (dark by default, choice remembered)
+- Back to top button with reading progress ring
+- Interactive shell (`help`, `whoami`, `skills`, `theme`, `cat flag.txt` ...)
+- Photo logo and favicon, mobile friendly, respects reduced motion
+- Cache busting: the release script stamps `?v=<version>` on CSS/JS
 
 ## Folder layout
 

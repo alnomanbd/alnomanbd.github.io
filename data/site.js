@@ -12,7 +12,7 @@
   ============================================================
 */
 window.SITE = {
-  version: "1.4.0",
+  version: "1.5.0",
   updated: "2026-11-19",
 
   profile: {
@@ -21,16 +21,19 @@ window.SITE = {
     handle: "alnoman",
     title: "Senior Cybersecurity Engineer",
     roles: [
+      "Ethical Hacker",
+      "Dark Web Researcher",
       "Senior Cybersecurity Engineer",
-      "SOC Architect & Blue Teamer",
-      "DevSecOps Engineer",
       "Penetration Tester (CPENT, CEH)",
-      "AI-Driven Security & Agentic Workflows",
-      "Cloud & Kubernetes Security",
-      "Threat Intel & Dark Web Researcher"
+      "SOC Architect & Threat Hunter",
+      "AppSec & DevSecOps Engineer",
+      "AI-Driven Security Builder"
     ],
+    /* shown in the hero photo scan readout */
+    specialty: "Offensive security, dark web intel",
+    clearance: "CPENT / CEH / CCNP-S",
     location: "Dhaka, Bangladesh",
-    tagline: "I build SOCs, break applications on purpose and turn noisy logs into real alerts.",
+    tagline: "Ethical hacker and dark web researcher. I break into systems with permission, hunt leaked data in places most people never go, and build the SOCs that catch attackers.",
     lead: "I build and run **security operations**, secure the software delivery pipeline with **AppSec and DevSecOps**, hunt on the **dark web** for what leaks, and use **AI agents** to make defenders faster. Twelve years across banks, fintech, government and research.",
     about: [
       "I am a security engineer with more than a decade across offensive and defensive security. I design and run Security Operations Centers end to end: log pipelines, detection rules, SOAR automation, incident response and the dashboards that tell the story.",
@@ -51,9 +54,26 @@ window.SITE = {
     },
     /* small glowing chips under the tagline. color: amber | teal | coral | lilac | sky */
     chips: [
-      "SOC & Blue Team", "AppSec", "DevSecOps", "Offensive Security", "Dark Web & Threat Intel", "AI-Driven Security", "Cloud & Kubernetes", "GRC"
+      { label: "Ethical Hacking", color: "coral" },
+      { label: "Dark Web Research", color: "lilac" },
+      { label: "Threat Intel", color: "sky" },
+      { label: "SOC & Blue Team", color: "teal" },
+      { label: "AppSec & DevSecOps", color: "amber" },
+      { label: "AI-Driven Security", color: "lilac" }
     ]
   },
+
+  /* scrolling "intel feed" under the hero: [tag, text]. These describe what I do, not live data. */
+  ticker: [
+    ["TOR", "hidden service recon and leak site monitoring"],
+    ["OSINT", "mapping what a stranger can find about a target"],
+    ["RED TEAM", "web, API and network exploitation with written permission"],
+    ["CTI", "threat actor profiling and breach early warning"],
+    ["SOC", "detections mapped to MITRE ATT&CK, alerts that matter"],
+    ["DFIR", "triage, root cause analysis and containment"],
+    ["APPSEC", "OWASP Top 10, secure code review, SAST and SCA"],
+    ["AI SEC", "agentic SOC automation and LLM attack testing"]
+  ],
 
   stats: [
     { value: 12, suffix: "+", label: "Years in industry", color: "amber" },
