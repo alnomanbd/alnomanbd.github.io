@@ -12,7 +12,7 @@
   ============================================================
 */
 window.SITE = {
-  version: "1.2.0",
+  version: "1.2.1",
   updated: "2026-11-19",
 
   profile: {
@@ -36,7 +36,7 @@ window.SITE = {
       "My roots are in networking and infrastructure (Cisco CCNP Security, Fortinet NSE, Microsoft, VMware). On the offensive side I started as an application security and VAPT engineer, and today I hold the EC-Council CPENT and CEH. Lately I build AI-driven security: agentic workflows, RAG and automation that make a SOC faster. On the engineering side I build DevSecOps pipelines that push SAST, SCA and container findings into one place so developers can actually fix them.",
       "I also hold an M.Sc. from Nanjing University of Science and Technology, where I researched fog, cloud and IoT security and published work such as FogAuthChain, a blockchain based authentication scheme. I keep researching and writing. I am working toward being a true cybersecurity all-rounder: SOC, AppSec, cloud, GRC, CTI and AI security."
     ],
-    avatar: "assets/img/avatar.svg",
+    avatar: "assets/img/avatar.jpg",
     resume: "",
     email: "toalnoman@gmail.com",
     links: {
