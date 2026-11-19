@@ -12,27 +12,28 @@
   ============================================================
 */
 window.SITE = {
-  version: "1.0.0",
+  version: "1.1.0",
   updated: "2026-11-19",
 
   profile: {
-    name: "Abdullah Al-Noman",
-    fullName: "Abdullah Al-Noman Patwary",
+    name: "Abdullah Al Noman",
+    fullName: "Abdullah Al Noman Patwary",
     handle: "alnoman",
-    title: "Senior Security Engineer",
+    title: "Senior Cybersecurity Engineer",
     roles: [
-      "Senior Security Engineer",
+      "Senior Cybersecurity Engineer",
       "SOC Architect & Blue Teamer",
       "DevSecOps Engineer",
-      "Penetration Tester (CPENT)",
-      "Threat Intel & Dark Web Researcher",
-      "Security Researcher"
+      "Penetration Tester (CPENT, CEH)",
+      "AI-Driven Security & Agentic Workflows",
+      "Cloud & Kubernetes Security",
+      "Threat Intel & Dark Web Researcher"
     ],
     location: "Dhaka, Bangladesh",
     tagline: "I build SOCs, break applications on purpose and turn noisy logs into real alerts.",
     about: [
       "I am a security engineer with more than a decade across offensive and defensive security. I design and run Security Operations Centers end to end: log pipelines, detection rules, SOAR automation, incident response and the dashboards that tell the story.",
-      "On the offensive side I started as an application security and VAPT engineer, and today I hold the EC-Council CPENT. On the engineering side I build DevSecOps pipelines that push SAST, SCA and container findings into one place so developers can actually fix them.",
+      "My roots are in networking and infrastructure (Cisco CCNP Security, Fortinet NSE, Microsoft, VMware). On the offensive side I started as an application security and VAPT engineer, and today I hold the EC-Council CPENT and CEH. Lately I build AI-driven security: agentic workflows, RAG and automation that make a SOC faster. On the engineering side I build DevSecOps pipelines that push SAST, SCA and container findings into one place so developers can actually fix them.",
       "I also hold an M.Sc. from Nanjing University of Science and Technology, where I researched fog, cloud and IoT security and published work such as FogAuthChain, a blockchain based authentication scheme. I keep researching and writing. I am working toward being a true cybersecurity all-rounder: SOC, AppSec, cloud, GRC, CTI and AI security."
     ],
     avatar: "assets/img/avatar.svg",
@@ -50,9 +51,9 @@ window.SITE = {
   },
 
   stats: [
-    { value: 12, suffix: "+", label: "Years in security" },
+    { value: 15, suffix: "+", label: "Years in IT & security" },
     { value: 209, suffix: "", label: "Research citations" },
-    { value: 4, suffix: "", label: "h-index" },
+    { value: 18, suffix: "", label: "Certifications" },
     { value: 95, suffix: "+", label: "Handbook pages published" }
   ],
 
@@ -94,6 +95,18 @@ window.SITE = {
       icon: "cloud",
       level: 80,
       items: ["AWS", "Kubernetes", "Docker", "Linux Hardening", "Cloudflare WAF", "Terraform", "Networking", "Bash / PowerShell"]
+    },
+    {
+      group: "AI Security & Automation",
+      icon: "cpu",
+      level: 80,
+      items: ["Agentic AI", "Agentic Workflows", "RAG", "MCP", "LLM Security", "n8n Automation", "CI/CD Automation", "AI-Driven SOC"]
+    },
+    {
+      group: "Network Security",
+      icon: "net",
+      level: 88,
+      items: ["Cisco (CCNP Security)", "Fortinet", "Firewalls", "VPN", "IDS / IPS", "Routing & Switching", "Active Directory", "VMware"]
     },
     {
       group: "Threat Intel & GRC",
@@ -144,15 +157,36 @@ window.SITE = {
   ],
 
   education: [
-    { degree: "M.Sc.", school: "Nanjing University of Science and Technology (NJUST)", period: "2016 - 2019", note: "Research in fog, cloud and IoT security, supervised by Prof. Anmin Fu" },
-    { degree: "B.Sc.", school: "", period: "2011 - 2014", note: "" }
+    { degree: "Master of Science (MS), Computer Science and Engineering (Cyber Security)", school: "Nanjing University of Science and Technology, China", period: "Aug 2016 - Nov 2019", note: "Research in cloud, fog and IoT security, blockchain and cryptography, supervised by Prof. Anmin Fu" },
+    { degree: "Bachelor of Science (BS), Computer Science and Engineering", school: "State University of Bangladesh", period: "Jan 2011 - Dec 2014", note: "Problem solving, competitive programming" },
+    { degree: "Diploma, Computer Systems Networking and Telecommunications", school: "Daffodil Institute of IT", period: "2009 - 2010", note: "Networking, Linux system administration, software development" },
+    { degree: "Higher Secondary Certificate (HSC), Science", school: "Kabi Nazrul Govt. College", period: "2006 - 2008", note: "" },
+    { degree: "Secondary School Certificate (SSC), Science", school: "Hajigonj Pilot High School", period: "2004 - 2006", note: "" }
   ],
 
+  /* status: "active" (valid now), "earned" (achieved, older), "in-progress" (studying)
+     category is used for the filter buttons above the certificate grid */
   certifications: [
-    { name: "Certified Penetration Testing Professional", short: "CPENT", issuer: "EC-Council", year: "2026", status: "active", url: "" },
-    { name: "Certified Kubernetes Administrator", short: "CKA", issuer: "CNCF / Linux Foundation", year: "", status: "in-progress", url: "" },
-    { name: "Certified Kubernetes Security Specialist", short: "CKS", issuer: "CNCF / Linux Foundation", year: "", status: "in-progress", url: "" },
-    { name: "AWS Security", short: "AWS", issuer: "Amazon Web Services", year: "", status: "in-progress", url: "" }
+    { name: "Certified Penetration Testing Professional", short: "CPENT", issuer: "EC-Council", year: "2026", status: "active", category: "Offensive", url: "" },
+    { name: "Threat Intelligence Fundamentals for SOC Analysts", short: "CTI", issuer: "SOCRadar", year: "2026", status: "active", category: "Threat Intel", url: "" },
+    { name: "Fundamentals of Dark Web", short: "DARK", issuer: "SOCRadar", year: "2026", status: "active", category: "Threat Intel", url: "" },
+    { name: "OWASP API Security Top 10", short: "API10", issuer: "APIsec University", year: "2024", status: "active", category: "AppSec", url: "" },
+    { name: "API Security for PCI Compliance", short: "PCI", issuer: "APIsec University", year: "2024", status: "active", category: "AppSec", url: "" },
+    { name: "API Security Fundamentals", short: "API", issuer: "APIsec University", year: "2024", status: "active", category: "AppSec", url: "" },
+    { name: "Fortinet NSE 3: Certified Associate", short: "NSE3", issuer: "Fortinet", year: "2022", status: "earned", category: "Network", url: "" },
+    { name: "Fortinet NSE 2: Certified Associate", short: "NSE2", issuer: "Fortinet", year: "2022", status: "earned", category: "Network", url: "" },
+    { name: "Fortinet NSE 1: Certified Associate", short: "NSE1", issuer: "Fortinet", year: "2020", status: "earned", category: "Network", url: "" },
+    { name: "Cisco Certified Network Professional Security (CCNP Security)", short: "CCNP", issuer: "Cisco", year: "2017", status: "earned", category: "Network", url: "" },
+    { name: "Certified Ethical Hacker (CEH)", short: "CEH", issuer: "EC-Council", year: "2017", status: "earned", category: "Offensive", url: "" },
+    { name: "VMware Certified Associate 6: Data Center Virtualization", short: "VCA6", issuer: "VMware", year: "2016", status: "earned", category: "Infrastructure", url: "" },
+    { name: "Cisco Certified Network Associate Security (CCNA Security)", short: "CCNA-S", issuer: "Cisco", year: "2014", status: "earned", category: "Network", url: "" },
+    { name: "Cisco Certified Network Associate Routing and Switching", short: "CCNA", issuer: "Cisco", year: "2011", status: "earned", category: "Network", url: "" },
+    { name: "Security Certified Network Specialist (SCNS)", short: "SCNS", issuer: "DefensityOne", year: "2011", status: "earned", category: "Network", url: "" },
+    { name: "Microsoft Certified IT Professional: Server 2008 Administrator", short: "MCITP", issuer: "Microsoft", year: "2011", status: "earned", category: "Infrastructure", url: "" },
+    { name: "MCTS: Windows Server 2008 Active Directory Configuration", short: "MCTS", issuer: "Microsoft", year: "2011", status: "earned", category: "Infrastructure", url: "" },
+    { name: "MCTS: Windows Server 2008 Network Infrastructure Configuration", short: "MCTS", issuer: "Microsoft", year: "2011", status: "earned", category: "Infrastructure", url: "" },
+    { name: "Certified Kubernetes Administrator", short: "CKA", issuer: "CNCF / Linux Foundation", year: "", status: "in-progress", category: "Cloud", url: "" },
+    { name: "Certified Kubernetes Security Specialist", short: "CKS", issuer: "CNCF / Linux Foundation", year: "", status: "in-progress", category: "Cloud", url: "" }
   ],
 
   projects: [

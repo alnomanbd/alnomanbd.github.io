@@ -255,7 +255,7 @@ img { max-width: 100%; display: block; }
 .now-card li::before { content: ">"; position: absolute; left: 0; color: var(--g); font-family: var(--mono); }
 
 /* ---------- skills ---------- */
-.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .skill-card {
   border: 1px solid var(--border); background: var(--panel); border-radius: var(--radius); padding: 24px;
   position: relative; overflow: hidden; transition: transform .3s, border-color .3s, box-shadow .3s;
@@ -308,7 +308,17 @@ img { max-width: 100%; display: block; }
 .tl-card li::before { content: "+"; position: absolute; left: 0; color: var(--g); font-family: var(--mono); }
 
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-.certs { display: grid; gap: 12px; }
+.certs { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 14px; }
+.cert.hide { display: none; }
+.cert-info { min-width: 0; }
+.cert h5 { line-height: 1.35; }
+.cert.earned .cert-badge { background: linear-gradient(135deg, #00b8d4, #00c278); color: #001218; }
+.cert-badge { font-size: .72rem; letter-spacing: -.3px; }
+.status.earned { color: var(--c); border: 1px solid rgba(0,229,255,.35); }
+.cert-summary { display: flex; flex-wrap: wrap; gap: 28px; margin-bottom: 22px; color: var(--muted); font-size: .9rem; }
+.cert-summary b { color: var(--g); font-size: 1.6rem; margin-right: 6px; }
+#cert-filters { margin-bottom: 22px; }
+.edu { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 6px 30px; }
 .cert {
   display: flex; align-items: center; gap: 16px; padding: 16px 18px; border-radius: var(--radius);
   border: 1px solid var(--border); background: var(--panel); transition: .3s;
@@ -409,6 +419,7 @@ img { max-width: 100%; display: block; }
 /* ---------- responsive ---------- */
 @media (max-width: 1024px) {
   .skills-grid, .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  .certs, .edu { grid-template-columns: 1fr; }
   .hero-inner { grid-template-columns: 1fr; }
   .hero-right { max-width: 640px; }
   .radar { display: none; }

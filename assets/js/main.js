@@ -28,6 +28,8 @@
     code: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6M14 4l-4 16"/></svg>',
     bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg>',
     cloud: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.8A6 6 0 0 0 4.3 12 3.5 3.5 0 0 0 6.5 19h11Z"/></svg>',
+    cpu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg>',
+    net: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="6" height="5" rx="1"/><rect x="2" y="17" width="6" height="5" rx="1"/><rect x="16" y="17" width="6" height="5" rx="1"/><path d="M12 7v5M5 17v-3h14v3"/></svg>',
     eye: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>'
   };
   const linkLabels = { github: "GitHub", linkedin: "LinkedIn", scholar: "Google Scholar", twitter: "X / Twitter", medium: "Medium", tryhackme: "TryHackMe", hackthebox: "Hack The Box" };
@@ -91,13 +93,7 @@
         </div>
       </div>`).join("");
 
-    $("#certs").innerHTML = (S.certifications || []).map((c) => {
-      const st = c.status === "in-progress" ? "in-progress" : "active";
-      const inner = `<div class="cert-badge">${esc(c.short)}</div>
-        <div><h5>${esc(c.name)}</h5><p>${esc(c.issuer)}${c.year ? " | " + esc(c.year) : ""}</p></div>
-        <span class="status ${st}">${st === "active" ? "VERIFIED" : "IN PROGRESS"}</span>`;
-      return c.url ? `<a class="cert ${st}" href="${esc(c.url)}" target="_blank" rel="noopener">${inner}</a>` : `<div class="cert ${st}">${inner}</div>`;
-    }).join("");
+    renderCerts();
 
     $("#edu").innerHTML = (S.education || []).map((e) => `
       <div class="edu-item"><span class="tl-period">${esc(e.period)}</span><h5>${esc(e.degree)}${e.school ? ", " + esc(e.school) : ""}</h5>${e.note ? `<p>${esc(e.note)}</p>` : ""}</div>`).join("");
@@ -125,6 +121,33 @@
       <a class="post" href="${esc(p.url)}" target="_blank" rel="noopener">
         <time>${esc(p.date)} | ${esc(p.tag)}</time><span>${esc(p.title)}</span><span class="arrow">&gt;</span>
       </a>`).join("");
+  }
+
+  function renderCerts() {
+    const certs = S.certifications || [];
+    const label = { active: "ACTIVE", earned: "EARNED", "in-progress": "IN PROGRESS" };
+    const done = certs.filter((c) => c.status !== "in-progress");
+    const issuers = new Set(done.map((c) => c.issuer)).size;
+    $("#cert-summary").innerHTML =
+      `<span><b data-count="${done.length}">0</b> certifications</span>` +
+      `<span><b data-count="${issuers}">0</b> issuers</span>` +
+      `<span><b data-count="${certs.length - done.length}">0</b> in progress</span>`;
+    const cats = ["all"].concat([...new Set(certs.map((c) => c.category).filter(Boolean))]);
+    $("#cert-filters").innerHTML = cats.map((t, i) => `<button class="${i === 0 ? "on" : ""}" data-f="${esc(t)}">${esc(t.toLowerCase())}</button>`).join("");
+    $("#certs").innerHTML = certs.map((c) => {
+      const st = label[c.status] ? c.status : "earned";
+      const inner = `<div class="cert-badge">${esc(c.short)}</div>
+        <div class="cert-info"><h5>${esc(c.name)}</h5><p>${esc(c.issuer)}${c.year ? " | " + esc(c.year) : ""}</p></div>
+        <span class="status ${st}">${label[st]}</span>`;
+      const attrs = `class="cert ${st} reveal" data-cat="${esc(c.category || "")}"`;
+      return c.url ? `<a ${attrs} href="${esc(c.url)}" target="_blank" rel="noopener">${inner}</a>` : `<div ${attrs}>${inner}</div>`;
+    }).join("");
+    $("#cert-filters").addEventListener("click", (e) => {
+      const b = e.target.closest("button"); if (!b) return;
+      $$("#cert-filters button").forEach((x) => x.classList.toggle("on", x === b));
+      const f = b.dataset.f;
+      $$("#certs .cert").forEach((el) => el.classList.toggle("hide", f !== "all" && el.dataset.cat !== f));
+    });
   }
 
   function renderProjects() {
@@ -294,7 +317,7 @@
       });
     }, { threshold: 0.15 });
     $$(".reveal").forEach((el, i) => { el.style.transitionDelay = (i % 3) * 0.08 + "s"; io.observe(el); });
-    $$(".metric b[data-count]").forEach((el) => io.observe(el));
+    $$(".metric b[data-count], #cert-summary b[data-count]").forEach((el) => io.observe(el));
   }
 
   /* ---------- nav, progress, cursor, tilt ---------- */
@@ -346,6 +369,7 @@
         '  <span class="p">experience</span>   career history',
         '  <span class="p">projects</span>     things I built',
         '  <span class="p">certs</span>        certifications',
+        '  <span class="p">education</span>    degrees',
         '  <span class="p">contact</span>      how to reach me',
         '  <span class="p">social</span>       profile links',
         '  <span class="p">version</span>      site version',
@@ -362,7 +386,8 @@
       }).join("\n"),
       experience: () => (S.experience || []).map((e) => `<span class="y">${esc(e.period.padEnd(12))}</span> ${esc(e.role)} <span class="d">@ ${esc(e.org)}</span>`).join("\n"),
       projects: () => (S.projects || []).map((p) => `<span class="p">${esc(p.name)}</span> <span class="d">[${esc(p.type)}]</span>\n  ${esc(p.desc)}${p.url ? `\n  <a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.url)}</a>` : ""}`).join("\n\n"),
-      certs: () => (S.certifications || []).map((c) => `${c.status === "in-progress" ? '<span class="y">[~]</span>' : '<span class="p">[+]</span>'} ${esc(c.short)} <span class="d">${esc(c.name)} | ${esc(c.issuer)}</span>`).join("\n"),
+      certs: () => (S.certifications || []).map((c) => `${c.status === "in-progress" ? '<span class="y">[~]</span>' : '<span class="p">[+]</span>'} ${esc(c.short.padEnd(7))} <span class="d">${esc(c.name)} | ${esc(c.issuer)}${c.year ? " | " + esc(c.year) : ""}</span>`).join("\n"),
+      education: () => (S.education || []).map((e) => `<span class="y">${esc(e.period.padEnd(20))}</span> ${esc(e.degree)} <span class="d">@ ${esc(e.school)}</span>`).join("\n"),
       contact: () => P.email ? `email: <a href="mailto:${esc(P.email)}">${esc(P.email)}</a>` : "No email configured.",
       social: () => Object.entries(P.links || {}).filter(([, v]) => v).map(([k, v]) => `${esc((linkLabels[k] || k).padEnd(15))} <a href="${esc(v)}" target="_blank" rel="noopener">${esc(v)}</a>`).join("\n"),
       version: () => `alnoman.infosec v${esc(S.version)} <span class="d">(updated ${esc(S.updated)})</span>`,
@@ -376,7 +401,7 @@
         if (a === "contact.sh") return C.contact();
         return `cat: ${esc(a)}: No such file or directory`;
       },
-      goto: (a) => { const el = a && document.getElementById(a.replace("#", "")); if (el) { el.scrollIntoView({ behavior: "smooth" }); return `jumping to #${esc(a)}...`; } return "usage: goto about|skills|experience|projects|research|contact"; },
+      goto: (a) => { const el = a && document.getElementById(a.replace("#", "")); if (el) { el.scrollIntoView({ behavior: "smooth" }); return `jumping to #${esc(a)}...`; } return "usage: goto about|skills|experience|certifications|projects|research|contact"; },
       sudo: () => '<span class="r">Permission denied.</span> This incident will be reported to the SOC. (Which is me.)',
       "rm": () => '<span class="r">Nice try.</span> Write access denied.',
       hack: () => '<span class="p">Initiating hack...</span>\n<span class="d">Just kidding. Ethical hackers ask for permission first.</span>',

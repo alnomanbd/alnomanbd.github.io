@@ -3,6 +3,10 @@
 All notable changes to this website. Newest first.
 Versioning: MAJOR.MINOR.PATCH (major = redesign, minor = new section/feature, patch = content or fix).
 
+## [1.1.0] - 2026-11-19
+
+- Add all 18 LinkedIn certifications with filters, full education history, AI security and network skills
+
 ## [1.0.0] - 2026-11-19
 
 - First release: animated infosec portfolio (boot screen, matrix rain, glitch name, typed roles, live nmap terminal)
