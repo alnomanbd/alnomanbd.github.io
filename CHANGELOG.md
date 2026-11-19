@@ -3,6 +3,10 @@
 All notable changes to this website. Newest first.
 Versioning: MAJOR.MINOR.PATCH (major = redesign, minor = new section/feature, patch = content or fix).
 
+## [1.6.2] - 2026-11-19
+
+- Name on one line in Chakra Petch
+
 ## [1.6.1] - 2026-11-19
 
 - Hero sits higher, name back to bold two-line style with decrypt, tidy flag pills
