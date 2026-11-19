@@ -3,6 +3,10 @@
 All notable changes to this website. Newest first.
 Versioning: MAJOR.MINOR.PATCH (major = redesign, minor = new section/feature, patch = content or fix).
 
+## [1.7.1] - 2026-11-19
+
+- Justify the About (Who I am) text
+
 ## [1.7.0] - 2026-11-19
 
 - Hacker red accent across the whole site (was yellow), coral becomes pink, name in Tektur uppercase, 404 page recoloured

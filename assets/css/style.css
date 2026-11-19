@@ -756,3 +756,6 @@ code { font-family: var(--mono); font-size: .9em; color: var(--amber); backgroun
 .h-first, .h-last { text-transform: uppercase; }
 .h-last { margin-left: .28em; }
 @media (max-width: 640px) { .h-name { font-size: clamp(1.45rem, 7vw, 2rem); letter-spacing: 0; } }
+
+/* v1.7.1 About text justified */
+.about-text p { text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto; }
