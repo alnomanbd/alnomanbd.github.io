@@ -60,11 +60,7 @@
   /* ---------- render ---------- */
   function render() {
     document.title = `${P.name || "Portfolio"} | ${P.title || "Security Engineer"}`;
-    const parts = String(P.name || "").split(" ");
-    const last = parts.pop();
-    $("#hero-name").innerHTML = `${esc(parts.join(" "))} <span class="accent">${esc(last)}</span>`;
-    $("#hero-tag").textContent = P.tagline || "";
-    $("#hero-chips").innerHTML = (P.chips || []).map((c, i) => `<span class="chip" style="--c:${col(c.color, i)}"><i></i>${esc(c.label || c)}</span>`).join("");
+    renderHero();
     $("#hero-social").innerHTML = socialLinks();
     $("#contact-links").innerHTML = socialLinks();
     if (P.email) $("#mail-btn").href = `mailto:${P.email}`;
@@ -204,6 +200,44 @@
       </a>`).join("");
   }
 
+
+
+  /* ---------- hero: decrypt name, redacted tagline, CLI flags ---------- */
+  const GLYPHS = "!<>-_\\/[]{}=+*^?#$%&@0123456789ABCDEFabcdef";
+  function decrypt(el, text, dur, delay) {
+    if (reduced) { el.textContent = text; return; }
+    const start = performance.now() + (delay || 0);
+    const order = text.split("").map((c, i) => ({ c, at: (i / text.length) * dur * 0.7 + Math.random() * dur * 0.3 }));
+    (function frame(now) {
+      const t = now - start;
+      el.innerHTML = order.map(({ c, at }) => c === " " ? " " : t >= at ? esc(c) : `<span class="dc">${esc(GLYPHS[(Math.random() * GLYPHS.length) | 0])}</span>`).join("");
+      if (t < dur) requestAnimationFrame(frame); else el.textContent = text;
+    })(performance.now());
+    setTimeout(() => { el.textContent = text; }, dur + (delay || 0) + 150); // safety net
+  }
+  function renderHero() {
+    const parts = String(P.name || "").split(" "), last = parts.pop(), first = parts.join(" ");
+    const fEl = $("#h-first"), lEl = $("#h-last");
+    lEl.dataset.text = last;
+    fEl.textContent = first; lEl.textContent = last;
+    // tagline: {{secret}} parts start redacted and get declassified one by one
+    let k = 0;
+    $("#hero-tag").innerHTML = esc(P.tagline || "").replace(/\{\{(.+?)\}\}/g, (_, w) => `<span class="rd" data-k="${k++}">${w}</span>`);
+    $$("#hero-tag .rd").forEach((r) => setTimeout(() => r.classList.add("open"), reduced ? 0 : 1500 + Number(r.dataset.k) * 600));
+    // focus areas as command line flags
+    $("#hero-chips").innerHTML = (P.chips || []).map((c, i) => {
+      const label = c.label || c;
+      const flag = "--" + label.toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+      return `<span style="--c:${col(c.color, i)}">${esc(flag)}</span>`;
+    }).join(" ");
+    // typed prompt, then decrypt the name
+    const cmd = "./identify --target self", cEl = $("#h-cmd");
+    if (reduced) { cEl.textContent = cmd; return; }
+    let i = 0;
+    (function type() { cEl.textContent = cmd.slice(0, ++i); if (i < cmd.length) setTimeout(type, 38 + Math.random() * 40); })();
+    decrypt(fEl, first, 900, 500);
+    decrypt(lEl, last, 1300, 700);
+  }
 
   /* ---------- tooltip ---------- */
   const tip = $("#tip");

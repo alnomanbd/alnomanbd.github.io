@@ -12,7 +12,7 @@
   ============================================================
 */
 window.SITE = {
-  version: "1.5.0",
+  version: "1.6.0",
   updated: "2026-11-19",
 
   profile: {
@@ -33,7 +33,7 @@ window.SITE = {
     specialty: "Offensive security, dark web intel",
     clearance: "CPENT / CEH / CCNP-S",
     location: "Dhaka, Bangladesh",
-    tagline: "Ethical hacker and dark web researcher. I break into systems with permission, hunt leaked data in places most people never go, and build the SOCs that catch attackers.",
+    tagline: "Ethical hacker and dark web researcher. I break into systems {{with written permission}}, hunt {{leaked credentials and data}} in places most people never go, and build the {{SOCs that catch attackers}}.",
     lead: "I build and run **security operations**, secure the software delivery pipeline with **AppSec and DevSecOps**, hunt on the **dark web** for what leaks, and use **AI agents** to make defenders faster. Twelve years across banks, fintech, government and research.",
     about: [
       "I am a security engineer with more than a decade across offensive and defensive security. I design and run Security Operations Centers end to end: log pipelines, detection rules, SOAR automation, incident response and the dashboards that tell the story.",

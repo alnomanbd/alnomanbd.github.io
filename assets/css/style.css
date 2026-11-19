@@ -661,3 +661,59 @@ code { font-family: var(--mono); font-size: .9em; color: var(--amber); backgroun
 .ticker-track span:nth-child(3n) b { color: var(--coral); }
 :root[data-theme="light"] .ticker-label { color: #fff; }
 @media (max-width: 640px) { .ticker-label { padding: 10px 12px; font-size: .62rem; } .ticker { font-size: .72rem; } }
+
+/* ============================================================
+   v1.6 hero left: terminal prompt, decrypted name,
+   redacted tagline, CLI flags
+   ============================================================ */
+.h-prompt { font-size: .92rem; color: var(--text2); margin-bottom: 18px; display: flex; align-items: center; flex-wrap: wrap; }
+.h-user { color: var(--teal); } .h-sep { color: var(--text2); } .h-path { color: var(--sky); } .h-hash { color: var(--amber); margin: 0 2px; }
+#h-cmd { color: var(--text); }
+.h-cur { display: inline-block; width: 9px; height: 1.1em; margin-left: 3px; background: var(--amber); animation: blink 1s steps(1) infinite; vertical-align: middle; }
+.h-name { display: flex; flex-direction: column; gap: 6px; margin: 0; line-height: 1; }
+.h-first { font-size: clamp(1rem, 1.9vw, 1.35rem); font-weight: 500; letter-spacing: .55em; text-transform: uppercase; color: var(--text2); padding-left: 4px; }
+.h-last {
+  position: relative; display: inline-block; align-self: flex-start;
+  font-family: var(--head); font-weight: 800; font-size: clamp(4.2rem, 11vw, 8.6rem); line-height: .86; letter-spacing: -2px; text-transform: uppercase;
+  color: var(--text);
+}
+.h-last::before, .h-last::after { content: attr(data-text); position: absolute; inset: 0; pointer-events: none; }
+.h-last::before { color: transparent; -webkit-text-stroke: 1.5px var(--amber); transform: translate(10px, 10px); z-index: -1; opacity: .7; }
+.h-last::after { color: var(--teal); mix-blend-mode: screen; opacity: 0; clip-path: inset(0 0 100% 0); }
+.h-last:hover::after { animation: glitch-x .9s steps(2) 1; }
+@keyframes glitch-x {
+  0% { opacity: .9; clip-path: inset(10% 0 70% 0); transform: translate(-6px, 0); }
+  25% { clip-path: inset(55% 0 25% 0); transform: translate(6px, 0); }
+  50% { clip-path: inset(30% 0 45% 0); transform: translate(-4px, 0); color: var(--coral); }
+  75% { clip-path: inset(75% 0 5% 0); transform: translate(4px, 0); }
+  100% { opacity: 0; clip-path: inset(0 0 100% 0); }
+}
+.h-last .dc, .h-first .dc { color: var(--amber); opacity: .85; }
+.h-role { margin: 26px 0 16px; font-size: clamp(1rem, 1.8vw, 1.2rem); color: var(--amber); min-height: 1.6em; display: flex; align-items: center; gap: 8px; }
+.h-arrow { color: var(--teal); }
+.h-role .caret { color: var(--amber); font-size: .9em; animation: blink 1s steps(1) infinite; }
+.h-tag { font-size: 1.12rem; line-height: 1.75; color: var(--text2); max-width: 580px; margin-bottom: 22px; padding-left: 16px; border-left: 2px solid rgba(255,181,71,.45); }
+/* redaction bar: a background that wipes away line by line */
+.rd {
+  font-weight: 500; color: transparent; padding: 0 2px; border-radius: 2px;
+  background-image: linear-gradient(var(--redact, #3a4566), var(--redact, #3a4566)); background-repeat: no-repeat;
+  background-size: 100% 78%; background-position: right 60%;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  transition: background-size .6s cubic-bezier(.7,0,.3,1), color .3s .25s;
+}
+.rd.open { color: var(--text); background-size: 0% 78%; }
+.rd.open:hover { color: var(--amber); }
+:root[data-theme="light"] .rd { --redact: #1b2236; }
+.h-flags { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-bottom: 30px; font-size: .82rem; }
+.h-flags span { color: var(--c); position: relative; padding-bottom: 2px; }
+.h-flags span::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor; opacity: .35; }
+.btn .mono { opacity: .7; }
+@media (max-width: 640px) {
+  .h-first { letter-spacing: .35em; }
+  .h-last { letter-spacing: -1px; }
+  .h-last::before { transform: translate(6px, 6px); }
+  .h-tag { font-size: 1.02rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rd { color: var(--text); background-size: 0 0; }
+}

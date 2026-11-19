@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=1.5.0">
+  <link rel="stylesheet" href="assets/css/style.css?v=1.6.0">
 </head>
 <body>
   <!-- boot -->
@@ -68,14 +68,17 @@
     <section id="home" class="hero">
       <div class="hero-inner">
         <div class="hero-left">
-          <p class="prompt mono"><span class="teal">&gt;</span> whoami --public</p>
-          <h1 class="hero-name" id="hero-name"></h1>
-          <p class="hero-role mono"><span class="amber">[</span> <span id="typed"></span><span class="caret">_</span> <span class="amber">]</span></p>
-          <p class="hero-tag" id="hero-tag"></p>
-          <div class="hero-chips" id="hero-chips"></div>
+          <p class="h-prompt mono"><span class="h-user">root@alnoman</span><span class="h-sep">:</span><span class="h-path">~</span><span class="h-hash">#</span> <span id="h-cmd"></span><span class="h-cur"></span></p>
+          <h1 class="h-name" id="hero-name" aria-label="Abdullah Al Noman">
+            <span class="h-first mono" id="h-first"></span>
+            <span class="h-last" id="h-last"></span>
+          </h1>
+          <p class="h-role mono"><span class="h-arrow">&gt;&gt;</span> <span id="typed"></span><span class="caret">&#9608;</span></p>
+          <p class="h-tag" id="hero-tag"></p>
+          <div class="h-flags mono" id="hero-chips"></div>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#projects">View operations</a>
-            <a class="btn btn-ghost" href="#contact">Get in touch</a>
+            <a class="btn btn-primary" href="#projects"><span class="mono">$</span> view operations</a>
+            <a class="btn btn-ghost" href="#contact"><span class="mono">&gt;</span> open secure channel</a>
           </div>
           <div class="socials" id="hero-social"></div>
         </div>
@@ -221,7 +224,7 @@
   </button>
   <div class="tip mono" id="tip" role="tooltip"></div>
 
-  <script src="data/site.js?v=1.5.0"></script>
-  <script src="assets/js/main.js?v=1.5.0"></script>
+  <script src="data/site.js?v=1.6.0"></script>
+  <script src="assets/js/main.js?v=1.6.0"></script>
 </body>
 </html>

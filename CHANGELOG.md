@@ -3,6 +3,10 @@
 All notable changes to this website. Newest first.
 Versioning: MAJOR.MINOR.PATCH (major = redesign, minor = new section/feature, patch = content or fix).
 
+## [1.6.0] - 2026-11-19
+
+- Hacker style hero: terminal prompt, decrypting name with outline shadow and glitch, redacted tagline that declassifies, CLI style focus flags, command style buttons
+
 ## [1.5.0] - 2026-11-19
 
 - Back to the dark hacker theme: face scan hero, intel feed ticker, skill radar, career Gantt, cert chronology, citation bars, light/dark toggle, back to top, photo logo, ethical hacker and dark web identity
