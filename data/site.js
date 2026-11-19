@@ -12,7 +12,7 @@
   ============================================================
 */
 window.SITE = {
-  version: "1.2.1",
+  version: "1.3.0",
   updated: "2026-11-19",
 
   profile: {
@@ -47,14 +47,30 @@ window.SITE = {
       tryhackme: "",
       hackthebox: "",
       medium: ""
-    }
+    },
+    /* small glowing chips under the tagline. color: amber | teal | coral | lilac | sky */
+    chips: [
+      { label: "SOC & Blue Team", color: "teal" },
+      { label: "DevSecOps", color: "amber" },
+      { label: "Offensive Security", color: "coral" },
+      { label: "AI Security", color: "lilac" },
+      { label: "Threat Intel", color: "sky" }
+    ],
+    /* rows on the "CASE FILE" card in the hero */
+    dossier: [
+      ["BASE", "Dhaka, Bangladesh"],
+      ["FOCUS", "SOC, DevSecOps, Offensive, CTI"],
+      ["CLEARANCE", "CPENT, CEH, CCNP Security"],
+      ["RESEARCH", "209 citations, h-index 4"],
+      ["STATUS", "Active, building secure systems"]
+    ]
   },
 
   stats: [
-    { value: 12, suffix: "+", label: "Years in industry" },
-    { value: 209, suffix: "", label: "Research citations" },
-    { value: 18, suffix: "", label: "Certifications" },
-    { value: 95, suffix: "+", label: "Handbook pages published" }
+    { value: 12, suffix: "+", label: "Years in industry", color: "amber" },
+    { value: 209, suffix: "", label: "Research citations", color: "teal" },
+    { value: 18, suffix: "", label: "Certifications", color: "lilac" },
+    { value: 95, suffix: "+", label: "Handbook pages published", color: "coral" }
   ],
 
   now: [
@@ -68,48 +84,56 @@ window.SITE = {
   skills: [
     {
       group: "SOC & Detection",
+      color: "teal",
       icon: "shield",
       level: 95,
       items: ["Wazuh", "Elastic / ELK", "Splunk", "IBM QRadar", "Sigma", "MITRE ATT&CK", "Detection Engineering", "Log Pipelines"]
     },
     {
       group: "Offensive Security",
+      color: "coral",
       icon: "skull",
       level: 88,
       items: ["Web & API Pentest", "Network Pentest", "Burp Suite", "Nmap", "Metasploit", "Kali Linux", "OWASP Top 10", "Report Writing"]
     },
     {
       group: "AppSec & DevSecOps",
+      color: "amber",
       icon: "code",
       level: 90,
       items: ["SonarQube", "Dependency-Track", "DefectDojo", "Jenkins", "Trivy", "SAST / SCA / DAST", "Secure SDLC", "Threat Modeling"]
     },
     {
       group: "SOAR & Incident Response",
+      color: "lilac",
       icon: "bolt",
       level: 90,
       items: ["TheHive", "Cortex", "MISP", "n8n Automation", "Playbooks", "Triage", "Forensics Basics", "Threat Hunting"]
     },
     {
       group: "Cloud & Infrastructure",
+      color: "sky",
       icon: "cloud",
       level: 80,
       items: ["AWS", "Kubernetes", "Docker", "Linux Hardening", "Cloudflare WAF", "Terraform", "Networking", "Bash / PowerShell"]
     },
     {
       group: "AI Security & Automation",
+      color: "lilac",
       icon: "cpu",
       level: 80,
       items: ["Agentic AI", "Agentic Workflows", "RAG", "MCP", "LLM Security", "n8n Automation", "CI/CD Automation", "AI-Driven SOC"]
     },
     {
       group: "Network Security",
+      color: "sky",
       icon: "net",
       level: 88,
       items: ["Cisco (CCNP Security)", "Fortinet", "Firewalls", "VPN", "IDS / IPS", "Routing & Switching", "Active Directory", "VMware"]
     },
     {
       group: "Threat Intel & GRC",
+      color: "amber",
       icon: "eye",
       level: 82,
       items: ["OSINT", "Dark Web Monitoring", "Threat Feeds", "ISO 27001", "PCI DSS", "SOC 2", "NIST CSF", "Risk Assessment"]
@@ -120,6 +144,7 @@ window.SITE = {
     {
       role: "Senior Cybersecurity Engineer",
       org: "Synesis IT PLC",
+      color: "amber",
       period: "Mar 2026 - Present",
       location: "Dhaka, Bangladesh",
       points: [
@@ -133,6 +158,7 @@ window.SITE = {
     {
       role: "DevOps & DevSecOps Engineer",
       org: "United Commercial Bank PLC",
+      color: "teal",
       period: "Mar 2025 - Feb 2026",
       location: "Dhaka, Bangladesh",
       points: [
@@ -145,6 +171,7 @@ window.SITE = {
     {
       role: "Information Security Analyst",
       org: "Upay (UCB Fintech Company Limited)",
+      color: "coral",
       period: "Aug 2021 - Mar 2025",
       location: "Dhaka, Bangladesh",
       points: [
@@ -157,6 +184,7 @@ window.SITE = {
     {
       role: "IT Consultant",
       org: "Bangladesh Coast Guard Headquarters",
+      color: "sky",
       period: "May 2020 - Apr 2021",
       location: "Dhaka, Bangladesh",
       points: [
@@ -169,6 +197,7 @@ window.SITE = {
     {
       role: "Research Assistant (M.Sc.)",
       org: "Nanjing University of Science and Technology",
+      color: "lilac",
       period: "Aug 2016 - Nov 2019",
       location: "Nanjing, China",
       points: [
@@ -181,6 +210,7 @@ window.SITE = {
     {
       role: "Web Developer",
       org: "Creative IT Limited",
+      color: "teal",
       period: "Feb 2014 - Apr 2016",
       location: "Dhaka, Bangladesh",
       points: [
@@ -224,11 +254,17 @@ window.SITE = {
     { name: "Certified Kubernetes Security Specialist", short: "CKS", issuer: "CNCF / Linux Foundation", year: "", status: "in-progress", category: "Cloud", url: "" }
   ],
 
+  /* status: "live" | "lab" | "wip" (in progress). color: amber | teal | coral | lilac | sky
+     icon: shield skull code bolt cloud eye cpu net book layers radar pipe box bug users doc globe terminal lock
+     featured: true makes the card twice as wide. "type" is used for the filter buttons. */
   projects: [
     {
       name: "The Defensive Mind",
-      type: "Open Source Handbook",
-      desc: "A free, practical SOC handbook for any company: L1 to L3 field guides, incident response, 12 playbooks, detection engineering, SOAR, policies, labs and an 18 module training track.",
+      type: "Open Source",
+      icon: "book",
+      color: "amber",
+      status: "live",
+      desc: "A free, practical SOC handbook for any company: L1 to L3 field guides, incident response, 12 playbooks, detection engineering, SOAR, policies, labs and an 18 module training track. Published with MkDocs on GitHub Pages.",
       tags: ["SOC", "Blue Team", "MkDocs", "Training"],
       url: "https://alnomanbd.github.io/The-Defensive-Mind/",
       repo: "https://github.com/alnomanbd/The-Defensive-Mind",
@@ -236,48 +272,135 @@ window.SITE = {
     },
     {
       name: "SOC in a Box",
-      type: "Architecture",
-      desc: "Reference SOC stack with Wazuh as SIEM, TheHive and Cortex for case management, MISP for threat intel and automation glue for enrichment and notifications.",
+      type: "Blue Team",
+      icon: "shield",
+      color: "teal",
+      status: "live",
+      desc: "Production SOC stack: Wazuh as SIEM, TheHive and Cortex for case management and enrichment, MISP for threat intel, wired together with automation for alerting.",
       tags: ["Wazuh", "TheHive", "Cortex", "MISP"],
       url: "",
-      repo: "",
-      featured: true
+      repo: ""
+    },
+    {
+      name: "Wazuh Detection Pack",
+      type: "Blue Team",
+      icon: "radar",
+      color: "sky",
+      status: "live",
+      desc: "Custom Wazuh rules and decoders mapped to MITRE ATT&CK, plus a staged set of executive and analyst dashboards for alerts, exposure and compliance.",
+      tags: ["Wazuh", "Sigma", "MITRE ATT&CK", "Dashboards"],
+      url: "",
+      repo: ""
     },
     {
       name: "Threat Feed Automation",
-      type: "SOAR",
-      desc: "Daily pipeline that pulls public threat feeds, normalizes indicators and hot reloads them into SIEM lists so detections stay current without manual work.",
-      tags: ["n8n", "CTI", "Automation"],
+      type: "Automation",
+      icon: "bolt",
+      color: "lilac",
+      status: "live",
+      desc: "Daily workflow that pulls public threat feeds, normalizes indicators and hot reloads them into SIEM lists, with alerts to Telegram and Slack.",
+      tags: ["n8n", "CTI", "SOAR"],
       url: "",
-      repo: "",
-      featured: false
+      repo: ""
     },
     {
       name: "AppSec Pipeline",
       type: "DevSecOps",
+      icon: "pipe",
+      color: "amber",
+      status: "live",
       desc: "Jenkins pipeline running SonarQube (SAST) and Dependency-Track (SCA), pushing every finding into DefectDojo with matching counts and archived raw reports.",
-      tags: ["Jenkins", "SonarQube", "DefectDojo"],
+      tags: ["Jenkins", "SonarQube", "Dependency-Track", "DefectDojo"],
       url: "",
-      repo: "",
-      featured: false
+      repo: ""
     },
     {
-      name: "Kubernetes Security Lab",
-      type: "Lab",
-      desc: "Production style kubeadm cluster (HA control plane VIP, workers) used for break and fix practice, CIS benchmarking and runtime security.",
-      tags: ["Kubernetes", "CKS", "kube-bench"],
+      name: "VaultPay",
+      type: "Offensive Lab",
+      icon: "bug",
+      color: "coral",
+      status: "lab",
+      desc: "Intentionally vulnerable fintech app (Node, Java, PostgreSQL) used for AppSec training. Each planted flaw is mapped to OWASP Top 10 2025 and demoed live, attack and fix.",
+      tags: ["OWASP 2025", "AppSec Training", "Docker"],
       url: "",
-      repo: "",
-      featured: false
+      repo: ""
     },
     {
       name: "AI Assisted Pentest Lab",
       type: "Offensive Lab",
-      desc: "Kali based lab wired to an AI agent through MCP for recon and assessment workflows against intentionally vulnerable targets.",
+      icon: "terminal",
+      color: "coral",
+      status: "lab",
+      desc: "Kali lab wired to an AI agent through MCP for recon and assessment workflows against intentionally vulnerable targets such as OWASP Juice Shop.",
       tags: ["Kali", "MCP", "AI Security"],
       url: "",
-      repo: "",
-      featured: false
+      repo: ""
+    },
+    {
+      name: "Sentinel",
+      type: "AI Security",
+      icon: "cpu",
+      color: "lilac",
+      status: "wip",
+      desc: "AI security engineering project: building and attacking LLM apps, RAG pipelines and agents, then adding guardrails, evaluation and monitoring.",
+      tags: ["LLM Security", "RAG", "Agents", "Guardrails"],
+      url: "",
+      repo: ""
+    },
+    {
+      name: "Kubernetes Security Lab",
+      type: "Cloud",
+      icon: "box",
+      color: "sky",
+      status: "lab",
+      desc: "Production style kubeadm cluster (HA control plane VIP, workers) for break and fix practice, CIS benchmarking and runtime security on the CKA / CKS track.",
+      tags: ["Kubernetes", "CKS", "kube-bench"],
+      url: "",
+      repo: ""
+    },
+    {
+      name: "Dark Web Intelligence Lab",
+      type: "Threat Intel",
+      icon: "globe",
+      color: "teal",
+      status: "lab",
+      desc: "Isolated Whonix based research lab for passive dark web and CTI collection: leak site monitoring methods, OPSEC and intelligence reporting.",
+      tags: ["CTI", "Whonix", "OSINT", "OPSEC"],
+      url: "",
+      repo: ""
+    },
+    {
+      name: "Security Awareness Program",
+      type: "Training",
+      icon: "users",
+      color: "amber",
+      status: "live",
+      desc: "Interactive awareness sessions such as 'How much can a stranger find about you?' on personal digital safety and OSINT, with live demos, games and handouts.",
+      tags: ["Awareness", "OSINT", "Phishing", "Training"],
+      url: "",
+      repo: ""
+    },
+    {
+      name: "Secure Developer Program",
+      type: "Training",
+      icon: "code",
+      color: "teal",
+      status: "live",
+      desc: "Developer secure coding guide and hands-on lessons on reading SonarQube, Dependency-Track and DefectDojo findings and fixing them fast.",
+      tags: ["Secure SDLC", "DevSecOps", "Training"],
+      url: "",
+      repo: ""
+    },
+    {
+      name: "GRC Toolkit",
+      type: "GRC",
+      icon: "doc",
+      color: "sky",
+      status: "live",
+      desc: "Ready to adapt document sets for ISO 27001 ISMS, PCI DSS, SOC 2 and NIST CSF: policies, procedures, registers, evidence trackers and audit prep.",
+      tags: ["ISO 27001", "PCI DSS", "SOC 2", "NIST CSF"],
+      url: "",
+      repo: ""
     }
   ],
 

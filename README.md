@@ -6,12 +6,15 @@ Pure HTML, CSS and JavaScript. No build step, no framework, no dependencies. Hos
 
 ## Features
 
-- Boot sequence intro, matrix rain background, glitch title, typed roles
-- Live "nmap" terminal in the hero
-- Animated stats, skill bars, tool marquee, experience timeline
-- Filterable project grid, certifications, research metrics, notes
+- "Intel Map" theme: deep navy, amber / teal / coral / lilac / sky accents, HUD corner brackets, dot grid, topographic contours
+- Interactive constellation network background that reacts to the mouse
+- Hero with typed roles, radar and a "CASE FILE" dossier card with photo scan and stamp
+- Animated stats, colour coded skill cards, tool marquee, numbered career timeline
+- Filterable certifications and projects (OP-01, OP-02 ... with LIVE / LAB / IN PROGRESS status)
+- Research gauges (citations, h-index, i10) and paper cards
 - Interactive shell (`help`, `whoami`, `skills`, `projects`, `cat flag.txt` ...)
-- Mobile friendly, respects reduced motion
+- Mobile friendly dropdown menu, respects reduced motion
+- Cache busting: the release script stamps `?v=<version>` on CSS/JS so visitors always get the new build
 
 ## Folder layout
 

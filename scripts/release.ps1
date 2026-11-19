@@ -40,6 +40,11 @@ $site = $site -replace 'version:\s*"[^"]*"', "version: `"$new`""
 $site = $site -replace 'updated:\s*"[^"]*"', "updated: `"$today`""
 [IO.File]::WriteAllText("$root\data\site.js", $site, $utf8)
 
+# index.html cache busting: style.css?v=X, site.js?v=X, main.js?v=X
+$html = [IO.File]::ReadAllText("$root\index.html")
+$html = $html -replace '\?v=[0-9]+\.[0-9]+\.[0-9]+', "?v=$new"
+[IO.File]::WriteAllText("$root\index.html", $html, $utf8)
+
 # CHANGELOG (new entry under the header)
 $log = [IO.File]::ReadAllText("$root\CHANGELOG.md")
 $entry = "## [$new] - $today`n`n- $Message`n`n"

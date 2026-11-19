@@ -3,6 +3,10 @@
 All notable changes to this website. Newest first.
 Versioning: MAJOR.MINOR.PATCH (major = redesign, minor = new section/feature, patch = content or fix).
 
+## [1.3.0] - 2026-11-19
+
+- Intel Map redesign (constellation background, dossier hero, radar, gauges), 13 projects with filters and status, menu without numbers, mobile dropdown menu, cache busting
+
 ## [1.2.1] - 2026-11-19
 
 - Add profile photo as avatar and social preview image
