@@ -12,8 +12,8 @@
   ============================================================
 */
 window.SITE = {
-  version: "1.9.0",
-  updated: "2026-11-19",
+  version: "1.10.0",
+  updated: "2026-11-20",
 
   profile: {
     name: "Abdullah Al Noman",
@@ -89,6 +89,7 @@ window.SITE = {
     "Pushing every SAST and SCA finding into DefectDojo for developers",
     "Dark web and threat intelligence research for early breach warning",
     "Building AI-driven SOC automation with agents, RAG and MCP",
+    "Researching quantum security and post-quantum cryptography migration",
     "Kubernetes security on the CKA / CKS track",
     "Writing The Defensive Mind, an open SOC handbook"
   ],
@@ -296,6 +297,7 @@ window.SITE = {
       tags: ["SOC", "Blue Team", "MkDocs", "Training"],
       url: "https://alnomanbd.github.io/The-Defensive-Mind/",
       repo: "https://github.com/alnomanbd/The-Defensive-Mind",
+      stats: [["95+", "pages"], ["12", "playbooks"], ["18", "training modules"]],
       featured: true
     },
     {
@@ -361,6 +363,17 @@ window.SITE = {
       status: "lab",
       desc: "Kali lab wired to an AI agent through MCP for recon and assessment workflows against intentionally vulnerable targets such as OWASP Juice Shop.",
       tags: ["Kali", "MCP", "AI Security"],
+      url: "",
+      repo: ""
+    },
+    {
+      name: "Post-Quantum Crypto Lab",
+      type: "Quantum Security",
+      icon: "lock",
+      color: "sky",
+      status: "wip",
+      desc: "Hands-on lab for post-quantum cryptography: ML-KEM and ML-DSA with liboqs and the OpenSSL oqs-provider, hybrid TLS handshakes, and performance compared with RSA and ECC.",
+      tags: ["ML-KEM", "ML-DSA", "liboqs", "OpenSSL 3", "Hybrid TLS"],
       url: "",
       repo: ""
     },
@@ -438,7 +451,19 @@ window.SITE = {
     citations: 209,
     hIndex: 4,
     i10Index: 3,
-    interests: ["Cyber Security", "Blockchain", "Fog Security", "Cloud Security", "IoT Security"],
+    interests: ["Post-Quantum Cryptography", "Quantum Security", "Cyber Security", "Blockchain", "Fog Security", "Cloud Security", "IoT Security"],
+    /* what I am researching right now (shown as the ACTIVE RESEARCH card) */
+    current: {
+      title: "Quantum Security and Post-Quantum Cryptography",
+      status: "IN PROGRESS",
+      summary: "How large quantum computers break today's public key cryptography, and how organisations can migrate safely before they do. I focus on the NIST post-quantum standards, hybrid key exchange, crypto-agility and the harvest now, decrypt later threat to long-lived data.",
+      topics: ["FIPS 203 ML-KEM (Kyber)", "FIPS 204 ML-DSA (Dilithium)", "FIPS 205 SLH-DSA (SPHINCS+)", "Lattice-based cryptography", "Hybrid TLS key exchange", "Crypto inventory and agility", "Harvest now, decrypt later", "Quantum risk to PKI and VPNs"],
+      working: [
+        "Literature review of PQC migration and crypto-agility",
+        "PQC readiness assessment framework for banks and fintech",
+        "Lab: ML-KEM and ML-DSA with liboqs and the OpenSSL oqs-provider"
+      ]
+    },
     scholarUrl: "https://scholar.google.com/citations?user=be_4E7UAAAAJ&hl=en",
     papers: [
       { title: "FogAuthChain: A secure location-based authentication scheme in fog computing environments using Blockchain", venue: "Computer Communications, Vol. 162, pp. 212-224 (Elsevier)", year: "2020", cites: 82, url: "https://scholar.google.com/citations?user=be_4E7UAAAAJ&hl=en" },

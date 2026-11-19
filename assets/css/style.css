@@ -908,3 +908,87 @@ code { font-family: var(--mono); font-size: .9em; color: var(--amber); backgroun
   .et-card { min-height: 0; margin-left: calc(var(--lift) * 10px); }
 }
 @media (max-width: 640px) { .et-card { margin-left: calc(var(--lift) * 6px); } }
+
+
+/* ============================================================
+   v1.10 projects as running services + active quantum research
+   ============================================================ */
+.svc-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.svc-grid > .hide { display: none; }
+.led { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex: none; background: var(--teal); box-shadow: 0 0 8px var(--teal); }
+.led.s-lab { background: var(--sky); box-shadow: 0 0 8px var(--sky); }
+.led.s-wip { background: var(--lilac); box-shadow: 0 0 8px var(--lilac); animation: blink 1s steps(1) infinite; }
+.svc-feature { grid-column: 1 / -1; border-radius: 14px; overflow: hidden; background: rgba(5,8,15,.82); border: 1px solid color-mix(in srgb, var(--c) 40%, transparent); box-shadow: 0 24px 60px rgba(0,0,0,.4), 0 0 40px color-mix(in srgb, var(--c) 10%, transparent); }
+.sf-body { display: grid; grid-template-columns: 1fr 230px; }
+.sf-main { padding: 20px 24px 22px; font-size: .84rem; color: #cdd5ee; }
+.sf-cmd { color: var(--text2); margin: 0 0 6px; } .sf-cmd .p { color: var(--teal); }
+.sf-main h4 { font-family: "Tektur", var(--head); font-size: clamp(1.4rem, 2.6vw, 2rem); font-weight: 800; color: #fff; margin: 4px 0 10px; letter-spacing: .5px; }
+.sf-desc { font-family: var(--body); font-size: .98rem; line-height: 1.7; color: #cdd5ee; max-width: 680px; margin: 0 0 16px; }
+.sf-ls { display: flex; flex-wrap: wrap; gap: 4px 18px; color: var(--sky); margin: 0 0 18px; }
+.sf-links { display: flex; gap: 10px; flex-wrap: wrap; }
+.sf-links a, .svc-links a { display: inline-flex; align-items: center; gap: 6px; color: var(--text); text-decoration: none; font-size: .76rem; padding: 6px 12px; border-radius: 8px; border: 1px solid var(--line); background: rgba(255,255,255,.03); transition: border-color .2s, color .2s; }
+.sf-links a:hover, .svc-links a:hover { color: var(--c); border-color: color-mix(in srgb, var(--c) 55%, transparent); }
+.sf-links svg, .svc-links svg { width: 14px; height: 14px; }
+.sf-side { border-left: 1px dashed var(--line); padding: 20px 20px; display: flex; flex-direction: column; gap: 12px; background: rgba(255,255,255,.02); }
+.sf-status { display: flex; align-items: center; gap: 8px; font-size: .74rem; color: var(--teal); margin: 0; }
+.sf-stat b { display: block; font-family: "Tektur", var(--head); font-size: 1.7rem; color: var(--c); line-height: 1; }
+.sf-stat span { font-size: .66rem; color: var(--text2); letter-spacing: 1px; }
+.sf-meta { margin: auto 0 0; font-size: .66rem; color: var(--muted); line-height: 1.7; }
+.svc { display: flex; flex-direction: column; border-radius: 12px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); transition: transform .35s var(--ease), border-color .35s, box-shadow .35s; }
+.svc:hover { transform: translateY(-6px); border-color: color-mix(in srgb, var(--c) 50%, transparent); box-shadow: 0 20px 50px rgba(0,0,0,.4), 0 0 30px color-mix(in srgb, var(--c) 14%, transparent); }
+.svc-bar { display: flex; align-items: center; gap: 8px; padding: 9px 14px; font-size: .7rem; background: rgba(255,255,255,.03); border-bottom: 1px solid var(--line); }
+.svc-bar b { color: var(--text); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.svc-pid { margin-left: auto; color: var(--muted); white-space: nowrap; }
+.svc-body { padding: 16px 16px 12px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.svc-head { display: flex; gap: 12px; align-items: center; }
+.svc-head .node { width: 42px; height: 42px; margin: 0; flex: none; }
+.svc-head h4 { font-family: var(--head); font-size: 1.22rem; font-weight: 700; line-height: 1.15; color: var(--text); }
+.svc-head .ptype { margin: 2px 0 0; font-size: .76rem; color: var(--c); }
+.svc-desc { font-size: .9rem; color: var(--text2); line-height: 1.6; margin: 0; flex: 1; }
+.svc-stack { font-size: .72rem; color: var(--sky); margin: 0; line-height: 1.6; }
+.svc-stack span { color: var(--muted); }
+.svc-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 14px; border-top: 1px dashed var(--line); font-size: .68rem; flex-wrap: wrap; }
+.svc-st { color: var(--teal); border: 0; padding: 0; margin: 0; letter-spacing: 0; font-size: inherit; } .svc-st.s-lab { color: var(--sky); } .svc-st.s-wip { color: var(--lilac); }
+.svc-st::before { content: "> "; color: var(--muted); }
+.svc-links { display: flex; gap: 6px; }
+.svc-links a { padding: 4px 9px; font-size: .68rem; }
+#filters button { text-transform: none; }
+:root[data-theme="light"] .svc-feature { background: #0f1526; }
+:root[data-theme="light"] .svc-bar { background: rgba(20,30,60,.04); }
+@media (max-width: 1100px) { .svc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .sf-body { grid-template-columns: 1fr; } .sf-side { border-left: 0; border-top: 1px dashed var(--line); flex-direction: row; flex-wrap: wrap; align-items: center; gap: 14px 22px; } .sf-meta { margin: 0; } }
+@media (max-width: 640px) { .svc-grid { grid-template-columns: 1fr; } .sf-main { padding: 16px; } }
+
+/* active research: quantum security / PQC */
+.qres { display: grid; grid-template-columns: 1.35fr 1fr; gap: 26px; align-items: center; padding: 26px 28px; margin-bottom: 26px; border-radius: 16px; position: relative; overflow: hidden;
+  background: radial-gradient(500px 260px at 90% 20%, rgba(125,211,252,.10), transparent 70%), var(--surface); border: 1px solid rgba(125,211,252,.35); }
+.qres::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(var(--sky), var(--lilac)); box-shadow: 0 0 14px var(--sky); }
+.q-top { display: flex; gap: 10px; align-items: center; font-size: .66rem; letter-spacing: 2px; margin-bottom: 12px; flex-wrap: wrap; }
+.q-tag { display: inline-flex; align-items: center; gap: 7px; color: var(--sky); }
+.q-tag i { width: 8px; height: 8px; border-radius: 50%; background: var(--sky); box-shadow: 0 0 10px var(--sky); animation: blink 1.2s steps(1) infinite; }
+.q-status { color: var(--lilac); border: 1px solid currentColor; border-radius: 4px; padding: 1px 7px; }
+.qres h3 { font-family: "Tektur", var(--head); font-weight: 800; font-size: clamp(1.4rem, 2.6vw, 2rem); line-height: 1.12; color: var(--text); margin: 0 0 12px; }
+.q-sum { color: var(--text2); line-height: 1.7; font-size: .98rem; margin: 0 0 16px; text-align: justify; hyphens: auto; }
+.q-topics { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.q-topics span { font-size: .7rem; color: var(--sky); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(125,211,252,.3); background: rgba(125,211,252,.06); }
+.q-wt { font-size: .66rem; letter-spacing: 1.5px; color: var(--muted); margin: 0 0 6px; }
+.q-work { list-style: none; display: grid; gap: 5px; margin: 0; padding: 0; }
+.q-work li { position: relative; padding-left: 18px; font-size: .9rem; color: var(--text); }
+.q-work li::before { content: ">"; position: absolute; left: 0; color: var(--lilac); font-family: var(--mono); }
+.q-vis { text-align: center; }
+.lattice { width: 100%; max-width: 360px; height: auto; display: block; margin: 0 auto; }
+.lattice circle { fill: rgba(154,166,196,.45); animation: lat-tw 3.6s ease-in-out infinite; animation-delay: calc(var(--n) * .35s); }
+@keyframes lat-tw { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
+.lattice .bv { stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 60; stroke-dashoffset: 60; animation: draw-v 1.4s .4s forwards var(--ease); }
+.lattice .v1 { stroke: var(--sky); } .lattice .v2 { stroke: var(--lilac); animation-delay: .8s; }
+@keyframes draw-v { to { stroke-dashoffset: 0; } }
+.lattice .origin { fill: var(--teal); animation: none; filter: drop-shadow(0 0 6px var(--teal)); }
+.lattice .target { fill: var(--amber); animation: none; filter: drop-shadow(0 0 6px var(--amber)); }
+.lattice .target-ring { fill: none; stroke: var(--amber); stroke-width: 1.5; animation: ring-out 2s infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes ring-out { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(4); opacity: 0; } }
+.lattice .err { stroke: var(--amber); stroke-width: 1.4; stroke-dasharray: 3 3; }
+.lattice text { font-family: var(--mono); font-size: 10px; fill: var(--muted); letter-spacing: 1px; }
+.q-cap { font-size: .68rem; color: var(--muted); margin: 8px 0 0; line-height: 1.5; }
+:root[data-theme="light"] .lattice circle { fill: rgba(20,30,60,.35); }
+@media (max-width: 900px) { .qres { grid-template-columns: 1fr; padding: 20px; } .lattice { max-width: 300px; } }
+@media (max-width: 640px) { .q-sum { text-align: left; } }

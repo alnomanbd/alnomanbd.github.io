@@ -114,11 +114,11 @@
       </a>`).join("");
   }
 
-  function filterBar(el, items, key, cards) {
+  function filterBar(el, items, key, cards, fmt) {
     const counts = {};
     items.forEach((x) => { const k = x[key]; if (k) counts[k] = (counts[k] || 0) + 1; });
     const cats = ["All"].concat(Object.keys(counts));
-    el.innerHTML = cats.map((t, i) => `<button class="${i === 0 ? "on" : ""}" data-f="${esc(t)}">${esc(t)}<b>${i === 0 ? items.length : counts[t]}</b></button>`).join("");
+    el.innerHTML = cats.map((t, i) => `<button class="${i === 0 ? "on" : ""}" data-f="${esc(t)}">${esc(fmt ? fmt(t) : t)}<b>${i === 0 ? items.length : counts[t]}</b></button>`).join("");
     el.addEventListener("click", (e) => {
       const b = e.target.closest("button"); if (!b) return;
       $$("button", el).forEach((x) => x.classList.toggle("on", x === b));
@@ -146,28 +146,85 @@
 
   function renderProjects() {
     const projects = S.projects || [];
-    const stLabel = { live: "LIVE", lab: "LAB", wip: "IN PROGRESS" };
-    $("#projects-grid").innerHTML = projects.map((p, i) => {
-      const c = col(p.color, i);
-      const links = [
-        p.url && `<a href="${esc(p.url)}" target="_blank" rel="noopener">${I.external} Live</a>`,
-        p.repo && `<a href="${esc(p.repo)}" target="_blank" rel="noopener">${I.github} Code</a>`
-      ].filter(Boolean).join("");
-      return `<article class="project reveal ${p.featured ? "featured" : ""}" data-f="${esc(p.type)}" style="--c:${c}">
-        <div class="project-top"><span class="op">OP-${String(i + 1).padStart(2, "0")}</span>${p.status ? `<span class="pstatus ${esc(p.status)}">${stLabel[p.status] || esc(p.status)}</span>` : ""}</div>
-        <div class="node">${I[p.icon] || I.layers}</div>
-        <h4>${esc(p.name)}</h4>
-        <div class="ptype">${esc(p.type)}</div>
-        <p>${esc(p.desc)}</p>
-        <div class="tags">${tagList(p.tags)}</div>
-        ${links ? `<div class="plinks">${links}</div>` : ""}
+    const slug = (t) => String(t).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    const pid = (t) => { let x = 7; for (const ch of t) x = (x * 31 + ch.charCodeAt(0)) % 9000; return 1000 + x; };
+    const st = { live: ["active (running)", "s-live"], lab: ["active (lab)", "s-lab"], wip: ["activating", "s-wip"] };
+    const links = (p) => [
+      p.url && `<a href="${esc(p.url)}" target="_blank" rel="noopener">${I.external} live</a>`,
+      p.repo && `<a href="${esc(p.repo)}" target="_blank" rel="noopener">${I.github} code</a>`
+    ].filter(Boolean).join("");
+    const feat = projects.find((p) => p.featured);
+    const html = projects.map((p, i) => {
+      const c = col(p.color, i), s = st[p.status] || ["loaded", "s-live"];
+      if (p === feat) {
+        return `<article class="svc-feature reveal" data-f="${esc(p.type)}" style="--c:${c}">
+          <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title mono">alnoman@ops:~/${esc(slug(p.name))}</span></div>
+          <div class="sf-body">
+            <div class="sf-main mono">
+              <p class="sf-cmd"><span class="p">$</span> cat README.md</p>
+              <h4># ${esc(p.name)}</h4>
+              <p class="sf-desc">${esc(p.desc)}</p>
+              <p class="sf-cmd"><span class="p">$</span> ls ./topics</p>
+              <p class="sf-ls">${(p.tags || []).map((t) => `<span>${esc(slug(t))}/</span>`).join("")}</p>
+              <div class="sf-links">${links(p)}</div>
+            </div>
+            <div class="sf-side mono">
+              <p class="sf-status"><span class="led ${s[1]}"></span> ${esc(s[0])}</p>
+              ${(p.stats || []).map(([v, l]) => `<div class="sf-stat"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join("")}
+              <p class="sf-meta">type: ${esc(p.type)}<br>pid: ${pid(p.name)}</p>
+            </div>
+          </div>
+        </article>`;
+      }
+      return `<article class="svc reveal" data-f="${esc(p.type)}" style="--c:${c}">
+        <div class="svc-bar mono"><span class="led ${s[1]}"></span><b>${esc(slug(p.name))}.service</b><span class="svc-pid">PID ${pid(p.name)}</span></div>
+        <div class="svc-body">
+          <div class="svc-head"><div class="node">${I[p.icon] || I.layers}</div><div><h4>${esc(p.name)}</h4><p class="ptype">${esc(p.type)}</p></div></div>
+          <p class="svc-desc">${esc(p.desc)}</p>
+          <p class="svc-stack mono"><span>stack:</span> ${(p.tags || []).map(esc).join(", ")}</p>
+        </div>
+        <div class="svc-foot mono"><span class="svc-st ${s[1]}">${esc(s[0])}</span><span class="svc-links">${links(p)}</span></div>
       </article>`;
     }).join("");
-    filterBar($("#filters"), projects, "type", "#projects-grid .project");
+    $("#projects-grid").innerHTML = html;
+    filterBar($("#filters"), projects, "type", "#projects-grid > article", (t) => t === "All" ? "--all" : "--type=" + slug(t));
+  }
+
+  /* ---------- research: active quantum / PQC work with a lattice visual ---------- */
+  function renderQuantum() {
+    const Q = (S.research || {}).current;
+    const box = $("#q-research");
+    if (!Q || !box) { if (box) box.remove(); return; }
+    // 2D lattice from basis b1, b2; one short vector and an LWE style noisy point
+    const b1 = [46, 12], b2 = [16, 40], pts = [];
+    for (let i = -6; i <= 6; i++) for (let k = -6; k <= 6; k++) {
+      const x = 160 + i * b1[0] + k * b2[0], y = 150 + i * b1[1] + k * b2[1];
+      if (x > 6 && x < 314 && y > 6 && y < 294) pts.push([x, y]);
+    }
+    const svg = `<svg class="lattice" viewBox="0 0 320 300" aria-hidden="true">
+      ${pts.map(([x, y], n) => `<circle cx="${x}" cy="${y}" r="2.2" style="--n:${n % 9}"/>`).join("")}
+      <line class="bv v1" x1="160" y1="150" x2="${160 + b1[0]}" y2="${150 + b1[1]}"/>
+      <line class="bv v2" x1="160" y1="150" x2="${160 + b2[0]}" y2="${150 + b2[1]}"/>
+      <circle class="origin" cx="160" cy="150" r="4.5"/>
+      <circle class="target" cx="${160 + b1[0] + b2[0] + 9}" cy="${150 + b1[1] + b2[1] - 7}" r="4"/>
+      <circle class="target-ring" cx="${160 + b1[0] + b2[0] + 9}" cy="${150 + b1[1] + b2[1] - 7}" r="4"/>
+      <line class="err" x1="${160 + b1[0] + b2[0]}" y1="${150 + b1[1] + b2[1]}" x2="${160 + b1[0] + b2[0] + 9}" y2="${150 + b1[1] + b2[1] - 7}"/>
+      <text x="12" y="20">LATTICE  L(B)</text><text x="12" y="290">b + e : find the closest point</text>
+    </svg>`;
+    box.innerHTML = `
+      <div class="q-text">
+        <div class="q-top mono"><span class="q-tag"><i></i> ACTIVE RESEARCH</span><span class="q-status">${esc(Q.status || "IN PROGRESS")}</span></div>
+        <h3>${esc(Q.title)}</h3>
+        <p class="q-sum">${esc(Q.summary)}</p>
+        <div class="q-topics mono">${(Q.topics || []).map((t) => `<span>${esc(t)}</span>`).join("")}</div>
+        ${(Q.working || []).length ? `<p class="q-wt mono">// currently working on</p><ul class="q-work">${Q.working.map((w) => `<li>${esc(w)}</li>`).join("")}</ul>` : ""}
+      </div>
+      <div class="q-vis">${svg}<p class="q-cap mono">Lattice problems (LWE, SVP, CVP) are the hard maths behind ML-KEM and ML-DSA.</p></div>`;
   }
 
   function renderResearch() {
     const R = S.research || {};
+    renderQuantum();
     $("#research-lead").textContent = R.summary || "";
     const g = (val, max, label, c) => {
       const pct = Math.min(1, (Number(val) || 0) / max);
