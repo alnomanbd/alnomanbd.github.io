@@ -406,7 +406,7 @@
     const ctx = c.getContext("2d");
     let w, h, nodes, dpr = Math.min(window.devicePixelRatio || 1, 2);
     const mouse = { x: -999, y: -999 };
-    const palette = ["52,227,196", "255,181,71", "125,211,252"];
+    const palette = ["52,227,196", "255,59,79", "125,211,252"];
     const make = () => {
       w = innerWidth; h = innerHeight;
       c.width = w * dpr; c.height = h * dpr; c.style.width = w + "px"; c.style.height = h + "px";
@@ -440,7 +440,7 @@
           if (d < LINK) { ctx.strokeStyle = `rgba(${a.c},${(1 - d / LINK) * .22})`; ctx.lineWidth = .8; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
         }
         const md = Math.hypot(a.x - mouse.x, a.y - mouse.y);
-        if (md < 180) { ctx.strokeStyle = `rgba(255,181,71,${(1 - md / 180) * .35})`; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke(); }
+        if (md < 180) { ctx.strokeStyle = `rgba(255,59,79,${(1 - md / 180) * .35})`; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke(); }
         ctx.fillStyle = `rgba(${a.c},.75)`; ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2); ctx.fill();
       }
     })();
@@ -623,7 +623,7 @@
   }
 
   function egg() {
-    console.log("%c alnoman.infosec ", "background:#ffb547;color:#120c00;font-weight:bold;font-size:14px;padding:4px 8px;border-radius:4px");
+    console.log("%c alnoman.infosec ", "background:#ff3b4f;color:#ffffff;font-weight:bold;font-size:14px;padding:4px 8px;border-radius:4px");
     console.log("%cReading the source? Respect. Open the terminal section and run: cat flag.txt", "color:#34e3c4");
   }
 
