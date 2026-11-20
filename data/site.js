@@ -12,7 +12,7 @@
   ============================================================
 */
 window.SITE = {
-  version: "1.12.1",
+  version: "1.13.0",
   updated: "2026-11-20",
 
   profile: {
@@ -168,6 +168,31 @@ window.SITE = {
       items: ["ISO 27001", "PCI DSS", "SOC 2", "NIST CSF", "Risk assessment", "Policies & SOPs", "Audit prep", "Awareness programs"]
     }
   ],
+
+  /* competitive programming background and languages (Programming section) */
+  programming: {
+    summary: "During my undergrad I was an ACM style competitive programmer: algorithms, data structures and problem solving against the clock. I competed in national and inter-university contests and placed well in several. That habit of breaking a problem down fast is the same one I use today to read exploits, write automation and review code.",
+    languages: [
+      { name: "C", file: "main.c", code: "printf(\"hello, world\\n\");", use: "Algorithms, contests, systems basics", color: "sky" },
+      { name: "C++", file: "solve.cpp", code: "#include <bits/stdc++.h>", use: "Competitive programming, STL, data structures", color: "coral" },
+      { name: "Java", file: "Main.java", code: "public static void main(String[] a)", use: "OOP, contest solutions, backend", color: "amber" },
+      { name: "Python", file: "recon.py", code: "import socket, requests", use: "Security tooling, automation, scripting", color: "teal" },
+      { name: "Node.js", file: "server.js", code: "const http = require('http');", use: "APIs, automation, web apps", color: "lilac" }
+    ],
+    judges: ["UVa Online Judge", "LightOJ", "SPOJ", "CodeChef", "Codeforces"],
+    /* newest first */
+    contests: [
+      { year: "2014", name: "IUT ICT Fest Programming Contest", venue: "Islamic University of Technology" },
+      { year: "2014", name: "National Collegiate Programming Contest (NCPC)", venue: "Daffodil International University" },
+      { year: "2014", name: "IUBAT IT Fest Programming Contest", venue: "IUBAT" },
+      { year: "2013", name: "IUT ICT Fest Programming Contest", venue: "Islamic University of Technology" },
+      { year: "2012", name: "ACM-ICPC Dhaka Regional", venue: "Daffodil International University" },
+      { year: "2012", name: "BUBT Programming Contest", venue: "Bangladesh University of Business and Technology" },
+      { year: "2012", name: "Bangladesh University Programming Contest", venue: "Bangladesh University" },
+      { year: "2012", name: "Quazi Azhar Ali Programming Contest", venue: "" },
+      { year: "2011", name: "ACM-ICPC Dhaka Regional", venue: "North South University" }
+    ]
+  },
 
   experience: [
     {

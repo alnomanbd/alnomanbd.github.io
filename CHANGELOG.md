@@ -3,6 +3,10 @@
 All notable changes to this website. Newest first.
 Versioning: MAJOR.MINOR.PATCH (major = redesign, minor = new section/feature, patch = content or fix).
 
+## [1.13.0] - 2026-11-20
+
+- New Programming section (language file tiles, online judges, contest submissions table), education cards without the coloured top border
+
 ## [1.12.1] - 2026-11-20
 
 - Remove contour line background, loadout meters readable in light mode

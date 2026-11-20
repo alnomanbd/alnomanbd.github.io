@@ -720,9 +720,38 @@
   }
 
 
+
+  /* ---------- programming: languages + contest submissions ---------- */
+  function renderProgramming() {
+    const G = S.programming;
+    const sec = $("#programming");
+    if (!G || !sec) { if (sec) sec.remove(); return; }
+    $("#prog-lead").textContent = G.summary || "";
+    $("#lang-grid").innerHTML = (G.languages || []).map((l, i) => `
+      <div class="lang-tile reveal" style="--c:${col(l.color, i)}">
+        <div class="lt-bar mono"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><b>${esc(l.file)}</b></div>
+        <div class="lt-body">
+          <code class="lt-code mono">${esc(l.code)}</code>
+          <h4>${esc(l.name)}</h4>
+          <p>${esc(l.use)}</p>
+        </div>
+      </div>`).join("");
+    const cs = G.contests || [], years = cs.map((c) => +c.year).filter(Boolean);
+    const span = years.length ? `${Math.min(...years)} to ${Math.max(...years)}` : "";
+    $("#cp-strip").innerHTML =
+      `<div class="cp-stats"><span><b>${cs.length}</b> contests</span><span><b>${esc(span)}</b> undergrad</span><span><b>${(G.judges || []).length}</b> online judges</span><span><b>${(G.languages || []).length}</b> languages</span></div>` +
+      `<div class="cp-judges"><span class="cp-l">practiced on</span>${(G.judges || []).map((x) => `<span class="cp-j">${esc(x)}</span>`).join("")}</div>`;
+    $("#cp-board").innerHTML = `
+      <div class="cpb-head mono"><span class="p">alnoman@judge:~$</span> status --contests --user alnoman</div>
+      <div class="cpb-table mono" role="table" aria-label="Programming contests">
+        <div class="cpb-row cpb-th" role="row"><span>#</span><span>WHEN</span><span>CONTEST</span><span>VENUE</span><span>VERDICT</span></div>
+        ${cs.map((c, i) => `<div class="cpb-row" role="row"><span class="cpb-n">${String(cs.length - i).padStart(2, "0")}</span><span class="cpb-y">${esc(c.year)}</span><span class="cpb-c">${esc(c.name)}</span><span class="cpb-v">${esc(c.venue || "-")}</span><span><b class="cpb-ok">ATTENDED</b></span></div>`).join("")}
+      </div>`;
+  }
+
   /* ---------- running light border on every box ---------- */
   function borders() {
-    const sel = ".glass, .skill-card, .cert, .svc, .svc-feature, .et-card, .paper, .post, .qres, .scan-read, .brief, .term, .gitlog, .scan-view, .ticker, .tm-panel, .project";
+    const sel = ".glass, .skill-card, .cert, .svc, .svc-feature, .et-card, .paper, .post, .qres, .scan-read, .brief, .term, .gitlog, .scan-view, .ticker, .tm-panel, .project, .lang-tile, .cp-board, .cp-strip";
     const boxes = $$(sel).filter((el) => !el.querySelector(":scope > .bx-ring"));
     boxes.forEach((el) => {
       el.classList.add("bx");
@@ -866,6 +895,7 @@
   network();
   ui();
   shell();
+  renderProgramming();
   egg();
   borders();
   boot(() => { typed(); observe(); });
