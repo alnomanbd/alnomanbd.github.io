@@ -1037,3 +1037,53 @@ code { font-family: var(--mono); font-size: .9em; color: var(--amber); backgroun
 .stat:hover::after { animation-duration: 1.8s; }
 :root[data-theme="light"] .stat b { text-shadow: none; }
 @media (prefers-reduced-motion: reduce) { .stat::after { animation: none; background: color-mix(in srgb, var(--c) 40%, transparent); } }
+
+
+/* ============================================================
+   v1.12 certifications polish, growth line, running borders
+   ============================================================ */
+/* cert cards */
+.cert { position: relative; overflow: hidden; gap: 10px; padding-bottom: 14px; }
+.cert-wm { position: absolute; right: -6px; bottom: 26px; font-family: "Tektur", var(--head); font-weight: 800; font-size: 4.2rem; line-height: 1; color: var(--c); opacity: .07; pointer-events: none; letter-spacing: -1px; }
+.cert-badge { width: 58px; height: 64px; font-size: .68rem; filter: drop-shadow(0 0 10px color-mix(in srgb, var(--c) 35%, transparent)); }
+.cert h5 { position: relative; font-size: 1rem; }
+.cert-iss { position: relative; font-family: var(--mono); font-size: .74rem; color: var(--text2); margin: 0; }
+.cert-foot { position: relative; margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--line); display: flex; justify-content: space-between; gap: 8px; font-family: var(--mono); font-size: .62rem; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; }
+.cert-ok { color: var(--c); }
+.cert::before { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.10) 48%, color-mix(in srgb, var(--c) 18%, transparent) 52%, transparent 65%); transform: translateX(-120%); transition: transform .9s var(--ease); pointer-events: none; }
+.cert:hover::before { transform: translateX(120%); }
+.cert > p:not(.cert-iss) { margin-top: 0; }
+
+/* chronology growth line */
+.c-wrap { position: relative; }
+.c-growth { position: absolute; left: 0; right: 0; top: 0; bottom: 8px; width: 100%; height: calc(100% - 8px); pointer-events: none; overflow: visible; }
+.cg-area { fill: color-mix(in srgb, var(--amber) 5%, transparent); }
+.cg-line { fill: none; stroke: var(--amber); stroke-width: 2; vector-effect: non-scaling-stroke; stroke-linejoin: round; filter: drop-shadow(0 0 6px var(--amber)); stroke-dasharray: 2000; stroke-dashoffset: 2000; }
+.chrono.in .cg-line { animation: cg-draw 2.4s .4s forwards var(--ease); }
+@keyframes cg-draw { to { stroke-dashoffset: 0; } }
+.cg-dots { position: absolute; left: 0; right: 0; top: 0; bottom: 8px; pointer-events: none; }
+.cg-dots span { position: absolute; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; border-radius: 50%; background: var(--bg); border: 2px solid var(--amber); box-shadow: 0 0 8px var(--amber); opacity: 0; transition: opacity .4s 2.2s; }
+.chrono.in .cg-dots span { opacity: 1; }
+.cg-total { position: absolute; transform: translate(-100%, -170%); font-family: var(--mono); font-size: .62rem; letter-spacing: 1.5px; color: #fff; background: var(--amber); padding: 2px 7px; border-radius: 3px; white-space: nowrap; opacity: 0; transition: opacity .4s 2.4s; }
+.chrono.in .cg-total { opacity: 1; }
+.c-cols { position: relative; z-index: 1; }
+.c-count { font-style: normal; font-family: var(--mono); font-size: .6rem; color: var(--text2); order: 99; margin-bottom: 2px; }
+.cg-key { color: var(--text2); } .cg-key i { display: inline-block; width: 14px; height: 2px; background: var(--amber); vertical-align: middle; margin-right: 4px; box-shadow: 0 0 6px var(--amber); }
+.c-col { justify-content: flex-start; }
+:root[data-theme="light"] .cg-dots span { background: #fff; }
+@media (max-width: 640px) { .c-count { display: none; } .cg-total { font-size: .55rem; } }
+
+/* running light border, added to boxes by JS */
+.bx { position: relative; }
+.bx-ring {
+  position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none; z-index: 3;
+  background: conic-gradient(from var(--ang), transparent 0deg, transparent 260deg, color-mix(in srgb, var(--c, var(--amber)) 30%, transparent) 305deg, var(--c, var(--amber)) 348deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity: .9; animation: stat-spin 6s linear infinite; animation-play-state: paused;
+}
+.bx-run > .bx-ring { animation-play-state: running; }
+.bx:hover > .bx-ring { animation-duration: 2.2s; opacity: 1; }
+.svc-feature > .bx-ring, .gitlog > .bx-ring, .term > .bx-ring { --c: var(--teal); }
+.scan-view > .bx-ring { z-index: 6; --c: var(--teal); }
+@media (prefers-reduced-motion: reduce) { .bx-ring { animation: none; opacity: .35; } }

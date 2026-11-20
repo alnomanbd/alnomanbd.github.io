@@ -135,8 +135,12 @@
     $("#cert-lead").textContent = `${done.length} certifications from ${issuers} issuers, from Cisco and Microsoft roots to offensive security and threat intel today.`;
     $("#certs").innerHTML = certs.map((c) => {
       const st = label[c.status] ? c.status : "earned";
-      const inner = `<div class="cert-top"><div class="cert-badge">${esc(c.short)}</div><span class="status">${label[st]}</span></div>
-        <h5>${esc(c.name)}</h5><p>${esc(c.issuer)}${c.year ? " &nbsp;|&nbsp; " + esc(c.year) : ""}</p>`;
+      const foot = st === "active" ? "[ok] VERIFIED" : st === "in-progress" ? "[..] STUDYING" : "[ok] EARNED";
+      const inner = `<span class="cert-wm" aria-hidden="true">${esc(c.year || "NEXT")}</span>
+        <div class="cert-top"><div class="cert-badge">${esc(c.short)}</div><span class="status">${label[st]}</span></div>
+        <h5>${esc(c.name)}</h5>
+        <p class="cert-iss">${esc(c.issuer)}${c.year ? " &nbsp;|&nbsp; " + esc(c.year) : ""}</p>
+        <div class="cert-foot"><span>${esc(c.category || "")}</span><span class="cert-ok">${foot}</span></div>`;
       const attrs = `class="cert ${st} reveal" data-f="${esc(c.category || "")}"`;
       return c.url ? `<a ${attrs} href="${esc(c.url)}" target="_blank" rel="noopener">${inner}</a>` : `<div ${attrs}>${inner}</div>`;
     }).join("");
@@ -466,8 +470,20 @@
     if (certs.some((c) => c.status === "in-progress")) cols.push("NEXT");
     const grid = `grid-template-columns: repeat(${cols.length}, minmax(0, 1fr))`;
     const inCol = (c, y) => y === "NEXT" ? c.status === "in-progress" : c.status !== "in-progress" && c.year === y;
-    $("#chrono").innerHTML = `<p class="g-head">CERTIFICATION CHRONOLOGY &nbsp;|&nbsp; <b>${yMin} TO ${yMax}</b> &nbsp;|&nbsp; HOVER A BLOCK, OR FILTER BELOW</p>` +
-      `<div class="c-cols" style="${grid}">${cols.map((y) => `<div class="c-col">${certs.filter((c) => inCol(c, y)).map((c) => `<span class="c-dot${c.status === "in-progress" ? " wip" : ""}" data-cat="${esc(c.category)}" data-tip="${esc(`<b>${c.name}</b><br>${c.issuer}${c.year ? ", " + c.year : ""}`)}" style="--c:${col(catColor[c.category])}">${esc(c.short)}</span>`).join("")}</div>`).join("")}</div>` +
+    // running total per column for the growth line
+    let run = 0;
+    const counts = cols.map((y) => certs.filter((c) => inCol(c, y)).length);
+    const cum = cols.map((y, i) => (y === "NEXT" ? run : (run += counts[i])));
+    const total = done.length, nC = cols.length;
+    const ptsXY = cum.map((v, i) => [((i + 0.5) / nC) * 100, 100 - (v / total) * 92]);
+    const line = ptsXY.map((p) => p.join(",")).join(" ");
+    const area = `0,100 ${line} 100,100`;
+    const growth = `<svg class="c-growth" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <polygon class="cg-area" points="${area}"/><polyline class="cg-line" points="${line}"/></svg>
+      <div class="cg-dots" aria-hidden="true">${ptsXY.map(([x, y], i) => counts[i] && cols[i] !== "NEXT" ? `<span style="left:${x}%;top:${y}%" title="${cum[i]} total"></span>` : "").join("")}
+        <b class="cg-total" style="left:${ptsXY[ptsXY.length - (cols[nC - 1] === "NEXT" ? 2 : 1)][0]}%;top:${ptsXY[ptsXY.length - (cols[nC - 1] === "NEXT" ? 2 : 1)][1]}%">${total} TOTAL</b></div>`;
+    $("#chrono").innerHTML = `<p class="g-head">CERTIFICATION CHRONOLOGY &nbsp;|&nbsp; <b>${yMin} TO ${yMax}</b> &nbsp;|&nbsp; <span class="cg-key"><i></i> cumulative growth</span> &nbsp;|&nbsp; HOVER A BLOCK, OR FILTER BELOW</p>` +
+      `<div class="c-wrap">${growth}<div class="c-cols" style="${grid}">${cols.map((y, ci) => `<div class="c-col">${counts[ci] ? `<em class="c-count">+${counts[ci]}</em>` : ""}${certs.filter((c) => inCol(c, y)).map((c) => `<span class="c-dot${c.status === "in-progress" ? " wip" : ""}" data-cat="${esc(c.category)}" data-tip="${esc(`<b>${c.name}</b><br>${c.issuer}${c.year ? ", " + c.year : ""}`)}" style="--c:${col(catColor[c.category])}">${esc(c.short)}</span>`).join("")}</div>`).join("")}</div></div>` +
       `<div class="c-years" style="${grid}">${cols.map((y) => `<span>${y === "NEXT" ? "next" : "'" + y.slice(2)}</span>`).join("")}</div>`;
     $$(".c-dot").forEach((d) => { d.addEventListener("mousemove", (e) => showTip(d.dataset.tip, e)); d.addEventListener("mouseleave", hideTip); });
     $("#cert-filters").addEventListener("click", (e) => {
@@ -703,6 +719,23 @@
     $$(".reveal").forEach((el, i) => { el.style.transitionDelay = (i % 4) * 0.07 + "s"; io.observe(el); });
   }
 
+
+  /* ---------- running light border on every box ---------- */
+  function borders() {
+    const sel = ".glass, .skill-card, .cert, .svc, .svc-feature, .et-card, .paper, .post, .qres, .scan-read, .brief, .term, .gitlog, .scan-view, .ticker, .tm-panel, .project";
+    const boxes = $$(sel).filter((el) => !el.querySelector(":scope > .bx-ring"));
+    boxes.forEach((el) => {
+      el.classList.add("bx");
+      const r = document.createElement("span");
+      r.className = "bx-ring"; r.setAttribute("aria-hidden", "true");
+      r.style.animationDelay = (-Math.random() * 6).toFixed(2) + "s";
+      el.appendChild(r);
+    });
+    if (reduced || !("IntersectionObserver" in window)) { boxes.forEach((el) => el.classList.add("bx-run")); return; }
+    const io = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle("bx-run", e.isIntersecting)), { rootMargin: "80px 0px" });
+    boxes.forEach((el) => io.observe(el));
+  }
+
   /* ---------- nav, progress, clock, hover glow ---------- */
   function ui() {
     const nav = $("#nav"), prog = $("#progress"), links = $$("#menu a");
@@ -834,5 +867,6 @@
   ui();
   shell();
   egg();
+  borders();
   boot(() => { typed(); observe(); });
 })();

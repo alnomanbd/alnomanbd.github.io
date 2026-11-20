@@ -3,6 +3,10 @@
 All notable changes to this website. Newest first.
 Versioning: MAJOR.MINOR.PATCH (major = redesign, minor = new section/feature, patch = content or fix).
 
+## [1.12.0] - 2026-11-20
+
+- Certifications: cumulative growth line with per-year counts, richer cert cards (year watermark, verified footer, hover shine); running light border on every box, animated only while visible
+
 ## [1.11.0] - 2026-11-20
 
 - Section top padding 40px, light mode Contact hover keeps red, stat cards with a light running around the border
