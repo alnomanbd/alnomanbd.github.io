@@ -808,7 +808,7 @@ code { font-family: var(--mono); font-size: .9em; color: var(--amber); backgroun
 .lo-bar { display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; }
 .lo-bar i { height: 8px; border-radius: 1px; background: rgba(154,166,196,.15); }
 .lo-bar i.on { background: var(--c); box-shadow: 0 0 6px color-mix(in srgb, var(--c) 60%, transparent); animation: seg-in .3s calc(1.2s + var(--k) * 60ms) both; }
-@keyframes seg-in { from { opacity: 0; transform: scaleY(.2); } to { opacity: 1; transform: none; } }
+@keyframes seg-in { from { transform: scaleY(.15); } to { transform: none; } }
 .lo-v { color: var(--c); text-align: right; }
 :root[data-theme="light"] .lo-bar i { background: rgba(20,30,60,.1); }
 :root[data-theme="light"] .op-live, :root[data-theme="light"] .op-live i { color: #fff; }
@@ -1087,3 +1087,10 @@ code { font-family: var(--mono); font-size: .9em; color: var(--amber); backgroun
 .svc-feature > .bx-ring, .gitlog > .bx-ring, .term > .bx-ring { --c: var(--teal); }
 .scan-view > .bx-ring { z-index: 6; --c: var(--teal); }
 @media (prefers-reduced-motion: reduce) { .bx-ring { animation: none; opacity: .35; } }
+
+/* v1.12.1 no contour lines; loadout readable in light mode */
+.bg-contours { display: none !important; }
+:root[data-theme="light"] .lo-bar i { background: rgba(20,30,60,.12); }
+:root[data-theme="light"] .lo-bar i.on { background: var(--c); box-shadow: none; }
+:root[data-theme="light"] .lo-n { color: var(--text); font-weight: 500; }
+:root[data-theme="light"] .lo-title { color: var(--text); }

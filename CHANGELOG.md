@@ -3,6 +3,10 @@
 All notable changes to this website. Newest first.
 Versioning: MAJOR.MINOR.PATCH (major = redesign, minor = new section/feature, patch = content or fix).
 
+## [1.12.1] - 2026-11-20
+
+- Remove contour line background, loadout meters readable in light mode
+
 ## [1.12.0] - 2026-11-20
 
 - Certifications: cumulative growth line with per-year counts, richer cert cards (year watermark, verified footer, hover shine); running light border on every box, animated only while visible
