@@ -3,6 +3,10 @@
 All notable changes to this website. Newest first.
 Versioning: MAJOR.MINOR.PATCH (major = redesign, minor = new section/feature, patch = content or fix).
 
+## [1.11.0] - 2026-11-20
+
+- Section top padding 40px, light mode Contact hover keeps red, stat cards with a light running around the border
+
 ## [1.10.0] - 2026-11-20
 
 - Projects as running services (terminal feature window, service tiles, systemctl style filters), Post-Quantum Crypto Lab project, active research card for quantum security and PQC with lattice visual

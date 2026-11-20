@@ -992,3 +992,48 @@ code { font-family: var(--mono); font-size: .9em; color: var(--amber); backgroun
 :root[data-theme="light"] .lattice circle { fill: rgba(20,30,60,.35); }
 @media (max-width: 900px) { .qres { grid-template-columns: 1fr; padding: 20px; } .lattice { max-width: 300px; } }
 @media (max-width: 640px) { .q-sum { text-align: left; } }
+
+
+/* ============================================================
+   v1.11 section spacing, light-mode CTA hover, animated stat cards
+   ============================================================ */
+.section { padding-top: 40px; }
+@media (max-width: 640px) { .section { padding-top: 40px; } }
+
+/* Contact button keeps its red fill on hover in light mode */
+:root[data-theme="light"] .nav nav a.nav-cta:hover { background: var(--amber); color: #fff; box-shadow: 0 0 22px rgba(214,31,58,.4); }
+
+/* stat cards: a light runs around the whole border */
+@property --ang { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.stats { counter-reset: st; }
+.stat {
+  counter-increment: st; isolation: isolate; border: 0; overflow: hidden;
+  padding: 24px 22px 20px; border-radius: 14px;
+  background:
+    radial-gradient(240px 120px at 0% 0%, color-mix(in srgb, var(--c) 12%, transparent), transparent 70%),
+    var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line);
+  transition: transform .35s var(--ease), box-shadow .35s;
+}
+.stat::before {
+  content: "0x0" counter(st); left: auto; right: 14px; top: 12px; bottom: auto; width: auto;
+  background: none; box-shadow: none;
+  font-family: var(--mono); font-size: .62rem; letter-spacing: 1.5px; color: var(--muted);
+}
+.stat::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.6px; pointer-events: none; z-index: -1;
+  background: conic-gradient(from var(--ang), transparent 0deg, transparent 250deg, color-mix(in srgb, var(--c) 35%, transparent) 300deg, var(--c) 345deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: stat-spin 4.5s linear infinite;
+}
+.stat:nth-child(2)::after { animation-delay: -1.1s; }
+.stat:nth-child(3)::after { animation-delay: -2.2s; }
+.stat:nth-child(4)::after { animation-delay: -3.3s; }
+@keyframes stat-spin { to { --ang: 360deg; } }
+.stat b { font-family: "Tektur", var(--head); font-weight: 800; font-size: 2.7rem; letter-spacing: .5px; text-shadow: 0 0 22px color-mix(in srgb, var(--c) 45%, transparent); }
+.stat span { display: block; margin-top: 6px; font-family: var(--mono); font-size: .74rem; letter-spacing: 1px; text-transform: uppercase; }
+.stat:hover { transform: translateY(-4px); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 35%, transparent), 0 18px 40px rgba(0,0,0,.35), 0 0 28px color-mix(in srgb, var(--c) 16%, transparent); }
+.stat:hover::after { animation-duration: 1.8s; }
+:root[data-theme="light"] .stat b { text-shadow: none; }
+@media (prefers-reduced-motion: reduce) { .stat::after { animation: none; background: color-mix(in srgb, var(--c) 40%, transparent); } }
