@@ -12,7 +12,7 @@
   ============================================================
 */
 window.SITE = {
-  version: "1.13.0",
+  version: "1.13.1",
   updated: "2026-11-20",
 
   profile: {
@@ -189,7 +189,7 @@ window.SITE = {
       { year: "2012", name: "ACM-ICPC Dhaka Regional", venue: "Daffodil International University" },
       { year: "2012", name: "BUBT Programming Contest", venue: "Bangladesh University of Business and Technology" },
       { year: "2012", name: "Bangladesh University Programming Contest", venue: "Bangladesh University" },
-      { year: "2012", name: "Quazi Azhar Ali Programming Contest", venue: "" },
+      { year: "2012", name: "Quazi Azhar Ali Programming Contest", venue: "Bangladesh University" },
       { year: "2011", name: "ACM-ICPC Dhaka Regional", venue: "North South University" }
     ]
   },

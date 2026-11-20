@@ -3,6 +3,10 @@
 All notable changes to this website. Newest first.
 Versioning: MAJOR.MINOR.PATCH (major = redesign, minor = new section/feature, patch = content or fix).
 
+## [1.13.1] - 2026-11-20
+
+- Programming link in the menu, nav fits on mid-size screens, Quazi Azhar Ali contest venue set to Bangladesh University
+
 ## [1.13.0] - 2026-11-20
 
 - New Programming section (language file tiles, online judges, contest submissions table), education cards without the coloured top border

@@ -1149,3 +1149,10 @@ code { font-family: var(--mono); font-size: .9em; color: var(--amber); backgroun
   .cpb-row:not(.cpb-th) > .cpb-v { grid-row: 2; }
 }
 @media (max-width: 420px) { .lang-grid { grid-template-columns: 1fr; } }
+
+/* v1.13.1 nine nav links fit on mid-size screens */
+@media (min-width: 981px) and (max-width: 1180px) {
+  .brand-text { display: none; }
+  .nav nav a { padding: 8px 9px; font-size: .82rem; }
+  .nav nav a.nav-cta { margin-left: 4px; }
+}
